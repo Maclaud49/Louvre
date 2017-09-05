@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>{% block title %}Billeterie{% endblock %}</title>
+
+    {% block stylesheets %}
+      <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+      <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css">
+      <link rel="stylesheet" href="{{ asset('css/louvre.css') }}" />
+    {% endblock %}
+
+
+  </head>
+
+  <body>
+  <div class="container-fluid">
+    {#<div id="banner-top" style="background-image:url({{ asset('images/louvre_billeterie.jpg') }})">
+
+        <div class="text-center">
+          Bienvenue sur la billeterie du musée du Louvre
+        </div>
+    </div>}#}
+
+
+    <div class="row" id="box-search">
+      <div class="thumbnail text-center">
+        <img src="{{ asset('images/louvreBilleterie.jpg') }}" alt="Entrée du Louvre" class="img-responsive">
+        <div class="caption col-sm-12">
+          <p id="welcome-text">Bienvenue sur la billeterie du musée du Louvre</p>
+        </div>
+      </div>
+    </div>
+
+
+    <div id="content" class="text-center" style="display:flex;flex-direction:column;justify-content:center;align-items:center;">
+       {% block content %}
+       {% endblock %}
+    </div>
+
+    <hr>
+
+    <div id="banner-bottom" style="height:100px"></div>
+  </div>
+
+
+
+  {% block javascripts %}
+    <script
+            src="https://code.jquery.com/jquery-3.2.1.min.js"
+            integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+            crossorigin="anonymous"></script>
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    <script
+            src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"
+            integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU="
+            crossorigin="anonymous"></script>
+    <script type="text/javascript" src="{{ asset('js/louvre.js') }}"></script>
+  {% endblock %}
+
+
+
+
+  </body>
+</html>

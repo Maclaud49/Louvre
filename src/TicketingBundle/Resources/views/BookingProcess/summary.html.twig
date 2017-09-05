@@ -1,0 +1,23 @@
+{% extends "TicketingBundle::layout.html.twig" %}
+
+{% block title %}
+    {{ parent() }} - Récapitulatif
+{% endblock %}
+
+{% block content %}
+
+
+
+    {% for message in app.session.flashbag.get('info') %}
+        <div class="alert alert-info">Message flash : {{ message }}</div>
+    {% endfor %}
+
+    <div>Récapitulatif de la commande</div>
+
+
+
+
+
+
+
+{% endblock %}

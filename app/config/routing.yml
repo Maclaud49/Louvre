@@ -1,0 +1,4 @@
+ticketing:
+    resource: "@TicketingBundle/Resources/config/routing.yml"
+    prefix:   /billeterie
+

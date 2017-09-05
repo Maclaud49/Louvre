@@ -1,0 +1,17 @@
+ticketing_booking:
+    path:     /reservation
+    defaults: { _controller: TicketingBundle:BookingProcess:booking }
+
+ticketing_paiement:
+    path:     /paiement
+    defaults: { _controller: TicketingBundle:BookingProcess:paiement }
+
+ticketing_summary:
+    path:     /recapitulatif
+    defaults: { _controller: TicketingBundle:BookingProcess:summary }
+
+
+ticketing_soldTicketsNb:
+    path: /tickets-vendus
+    defaults: { _controller: TicketingBundle:BookingProcess:soldTicketsNb }
+    methods: [POST]

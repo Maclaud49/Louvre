@@ -1,0 +1,23 @@
+{% form_theme form 'bootstrap_3_layout.html.twig' %}
+
+<div class="well">
+    {{ form_start(form) }}
+
+    {{ form_row(form.bookingDate)}}
+
+    {{ form_row(form.quantity)}}
+
+    <hr>
+
+    {{ form_row(form.tickets)}}
+
+    <br>
+
+
+
+    <div class="form-group text-center">
+            <input type="submit" class="btn btn-primary" id="validate-btn"  value="Paiement" />
+    </div>
+
+    {{ form_end(form) }}
+</div>
