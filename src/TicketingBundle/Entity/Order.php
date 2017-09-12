@@ -7,6 +7,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraints as Assert;
+use TicketingBundle\Entity\Ticket;
 
 /**
  * @ORM\Table(name="ticketing_order")
@@ -140,12 +141,37 @@ class Order
     private $tickets;
 
     /**
-     * @var Date
+     * @var \DateTime
      *
      * @ORM\Column(name="bookingDate", type="date")
      * @Assert\DateTime(message="La date choisie n'est pas valide")
      */
     private $bookingDate;
+
+    /**
+     * @return float
+     */
+    public function getOrderAmount()
+    {
+        return $this->orderAmount;
+    }
+
+    /**
+     * @param float $orderAmount
+     */
+    public function setOrderAmount(float $orderAmount)
+    {
+        $this->orderAmount = $orderAmount;
+    }
+
+    /**
+     * @var double
+     *
+     * @ORM\Column(name="orderAmount", type="decimal")
+     *
+     */
+
+    private $orderAmount;
 
 
     /**
@@ -192,4 +218,5 @@ class Order
         }
     return $random_code;
     }
+
 }

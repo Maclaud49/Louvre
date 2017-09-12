@@ -101,15 +101,22 @@ class Ticket{
        $dateTime1=new \Datetime($today);
        $age = $dateTime1->diff($birthday)->format('%y');
        $reduced = $this->getReducedPrice();
+       $fullDay = $this->getType();
 
-       if($reduced){
+       if ($age<4){
+       $this->price = 0;
+       }
+
+       elseif ($age>=4 && $age<12){
+       $this->price = 8;
+       }
+
+       elseif($reduced && $age>4 || !$fullDay ){
            $this->price = 10;
        }
-       elseif ($age<4){
-           $this->price = 0;
-       }
-       elseif ($age>4 && $age<12){
-           $this->price = 8;
+
+       elseif ($age>=60){
+           $this->price = 12;
        }
        else{
            $this->price = $price;
@@ -241,9 +248,6 @@ class Ticket{
     {
     }
 
-    /**
-     * @ORM\PrePersist
-     */
     public function setTicketPrice(){
         $this->setPrice(16);
     }

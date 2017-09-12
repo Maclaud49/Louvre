@@ -7,13 +7,11 @@ namespace TicketingBundle\Form;
 use Symfony\Component\Form\Extension\Core\Type\BirthdayType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
-use TicketingBundle\Repository\OrderRepository;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Form\Extension\Core\Type\DateType;
+
 
 
 class TicketType extends AbstractType
@@ -38,21 +36,25 @@ class TicketType extends AbstractType
             ->add('firstName',TextType::class,
                 array(
                     'label' => 'Nom',
+                    'attr' => array('class' => 'text-center'),
                     'required' => true,
                 ))
             ->add('lastName', TextType::class,
                 array(
                     'label' =>'Prénom',
+                    'attr' => array('class' => 'text-center'),
                     'required' => true,
                 ))
             ->add('country', TextType::class,
                 array(
                     'label' =>'Pays',
+                    'attr' => array('class' => 'text-center'),
                     'required' => true,
                 ))
             ->add('birthdayDate', BirthdayType::class,
                 array(
                     'label' =>'Date de naissance',
+                    'attr' => array('class' => 'text-center'),
                     'required' => true,
                     'widget' => 'choice',
                     'html5' => true,

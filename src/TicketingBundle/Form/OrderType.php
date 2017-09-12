@@ -25,7 +25,7 @@ class OrderType extends AbstractType
                     'label_attr' =>array('id' =>'bookingDateLabel'),
                     'widget' => 'single_text',
                     'html5' =>false,
-                    'attr' => array('class' => 'bookingDatepicker'),
+                    'attr' => array('class' => 'bookingDatepicker text-center'),
                     'invalid_message' =>"La date est invalide",
                     'required' => false,
                     'format' => 'dd/MM/yyyy'
@@ -37,6 +37,7 @@ class OrderType extends AbstractType
                 'label' =>'Quantité désirée',
                 'required' => false,
                 'label_attr' =>array('id' =>'qtyLabel'),
+                'attr' => array('class' => 'text-center'),
                 'data' => 0,
                     ))
             ->add('tickets', CollectionType::class,
@@ -50,6 +51,31 @@ class OrderType extends AbstractType
                     'label'=> false,
 
                 ))
+            ;
+
+            $builder->addEventListener(
+                FormEvents::PRE_SUBMIT,    // 1er argument : L'évènement qui nous intéresse : ici, PRE_SET_DATA
+                function(FormEvent $event) { // 2e argument : La fonction à exécuter lorsque l'évènement est déclenché
+                    // On récupère notre objet Advert sous-jacent
+                    //$order = $event->getData();
+                    //$qty = $order->getQuantity();
+                   // var_dump($order);
+
+                    /*if (null === $order) {
+                        return; // On sort de la fonction sans rien faire lorsque $advert vaut null
+                    }
+
+                    $tickets = $order->getTickets();
+                    $orderAmount = 0;
+                    foreach($tickets as $ticket){
+                        $ticket->setTicketPrice();
+                        $orderAmount += $ticket->getPrice();
+                        $order->setOrderAmount($orderAmount);
+                    }*/
+
+
+                }
+            );
         ;
     }
 

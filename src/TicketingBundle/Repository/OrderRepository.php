@@ -5,6 +5,8 @@ namespace TicketingBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\QueryBuilder;
+use TicketingBundle\Entity\Order;
+use TicketingBundle\Entity\Ticket;
 
 class OrderRepository extends EntityRepository
 {
@@ -35,6 +37,18 @@ class OrderRepository extends EntityRepository
         return $qb
             ->getQuery()
             ->getSingleScalarResult();
+    }
+
+    public function orderAmount(Order $order){
+
+        $tickets = $order->getTickets();
+        $orderAmount = 0;
+         foreach ($tickets as $ticket){
+             $orderAmount += $ticket->getPrice();
+         }
+
+
+        return $orderAmount;
     }
 
 }

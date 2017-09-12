@@ -7,7 +7,7 @@ imports:
 # Put parameters here that don't need to change on each machine where the app is deployed
 # http://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
-    locale: en
+    locale: fr
 
 framework:
     #esi:             ~
@@ -69,9 +69,8 @@ swiftmailer:
     password:  "%mailer_password%"
     spool:     { type: memory }
 
-# app/config/config.yml
-assetic:
-    debug:          '%kernel.debug%'
-    use_controller: '%kernel.debug%'
-    filters:
-        cssrewrite: ~
+services:
+    twig.extension.intl:
+       class: Twig_Extensions_Extension_Intl
+       tags:
+           - { name: twig.extension }

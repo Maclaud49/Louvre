@@ -91,18 +91,10 @@ $(function(){
     $('#order_quantity').change(function(){
         var $date = $( ".bookingDatepicker").val();
         var $qty =$('#order_quantity').val();
-        if($qty<0 && $date==""){
-            $('#ticketsQtyMessageWarning').text('Veuillez choisir une quantité de billet positive');
-            $('#ticketsQtyMessageWarning').show(0);
-        }
-        else if ($qty>0 && $date==""){
+        if ($qty>0 && $date !=""){
             $('#ticketsQtyMessageWarning').text('');
             $('#ticketsQtyMessageWarning').hide(0);
-        }
-        else if ($qty>0 && $date !=""){
-            $('#ticketsQtyMessageWarning').text('');
-            $('#ticketsQtyMessageWarning').hide(0);
-            $('#openDaysInformationMessage').hide();
+            $('#openDaysInformationMessage').hide(0);
             $('#PricesInformationMessage').show(0);
             resetTickets();
             validateBtn();
@@ -120,6 +112,13 @@ $(function(){
         }
     })
 
+    /*******************************Paiement page*********************************************************************/
+
+    $stripeBtn = $(".stripe-button-el");
+    $stripeBtn.html('<span style="display: block; min-height: 30px;">Paiement par carte</span>');
+
+
+
 });
 
 //Add a ticket to the page
@@ -127,7 +126,7 @@ function addTicket(index){
 
     var $container =$('#order_tickets');
     var $template = $container.attr('data-prototype')
-        .replace(/__name__label__/g, 'Billet n°' + (index)).replace(/class="control-label required">Billet/g,'class="control-label">Billet').replace(/__name__/g, index);
+        .replace(/__name__label__/g, 'Billet n°' + index).replace(/class="control-label required">Billet/g,'class="control-label">Billet').replace(/__name__/g, 'Billet_'+index);
 
     var $prototype = $($template);
     addDeleteLink($prototype);
@@ -152,6 +151,12 @@ function addDeleteLink($prototype) {
     $deleteLink.click(function (e) {
         var $qty =$('#order_quantity').val();
         $('#order_quantity').val($qty-1);
+        if($qty == 1){
+            $('#ticketsQtyMessageInfo').hide(0);
+            $('#ticketsQtyMessageWarning').hide(0);
+        }
+        validateBtn();
+
         $prototype.remove();
         e.preventDefault();
         return false;

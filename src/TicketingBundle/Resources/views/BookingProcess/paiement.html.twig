@@ -12,21 +12,109 @@
         <div class="alert alert-info">Message flash : {{ message }}</div>
     {% endfor %}
 
-    <div>Envoie vers Stripe</div>
+
+
+            <div id="container">
+                <div id="welcome">
+                    <h2>Récapitulatif de votre commande pour votre visite du musée du Louvre :</h2>
+                </div>
+
+                <div style="margin-top: 30px">
+                    <p><strong>Date de la visite :</strong> {{ order.bookingDate|date("d/m/y") }}</p>
+                </div>
+
+                <div class="tab-content" id="orderSummary">
+                    <div class="tab-pane fade in active adminTable">
+                        {% if order %}
+                            <div class="table-responsive" id="ticketsSummary">
+                            <table class="table table-hover table-condensed">
+                                <thead>
+                                <tr>
+                                    <th class="text-center">Billet</th>
+                                    <th class="text-center">Tarif réduit</th>
+                                    <th class="text-center">Nomination</th>
+                                    <th class="text-center">Quantité</th>
+                                    <th class="text-center">Tarif retenu</th>
+                                </tr>
+                                </thead>
+                                {% for ticket in order.tickets %}
+                                    <tr>
+                                        <td>{% if  ticket.type == 1  %}
+                                                <p>Journée</p>
+                                            {% else %}
+                                                <p>Demi-journée</p>
+                                            {% endif %}
+                                        </td>
+                                        <td>{% if  ticket.reducedPrice == 1  %}
+                                                <p>Oui</p>
+                                            {% else %}
+                                                <p>Non</p>
+                                            {% endif %}
+                                        </td>
+                                        <td class="text-center">{{ ticket.firstName }} {{ ticket.lastName }}</td>
+                                        <td class="text-center">1</td>
+                                        <td class="text-center">{{ ticket.Price|number_format(2, ',', '') }}€</td>
+
+                                    </tr>
+                                {% endfor %}
+                            </table>
+                            </div>
+                            <div class="table-responsive col-sm-offset-6 col-sm-6" id="totalSummary">
+                                <table class="table table-hover table-condensed">
+
+                                    <tr>
+                                        <th class="text-center" style="font-weight: normal;">Total HT</th>
+                                        <td class="text-center">{{ (order.orderAmount / 1.1)|number_format(2, ',', '') }}€</td>
+                                    </tr>
+                                    <tr>
+                                        <th class="text-center" style="font-weight: normal;">Total TVA (10,00%)</th>
+                                        <td class="text-center">{{ (order.orderAmount - order.orderAmount / 1.1)|number_format(2, ',', '')}}€</td>
+                                    </tr>
+                                    <tr>
+                                        <th class="text-center">Total de la commande</th>
+                                        <td class="text-center"><strong>{{ order.orderAmount|number_format(2, ',', '') }}€</strong></td>
+                                    </tr>
+                                </table>
+                            </div>
+
+                        {% else %}
+                            <div class="alert alert-warning">Pas de commande</div>
+                        {% endif %}
+                    </div>
+                </div>
 
 
 
 
-    <nav aria-label="Page navigation">
-        <ul class="pagination pagination-lg justify-content-center">
-            <li class="page-item">
-                <a class="page-link" href="{{ path('ticketing_booking') }}">Retour</a>
-            </li>
-            <li class="page-item">
-                <a class="page-link" href="{{ path('ticketing_summary') }}" style="margin-left:200px">Valider</a>
-            </li>
-        </ul>
-    </nav>
+
+                <div class="row" id="paiement-navigation">
+                    <div class="text-center">
+                        <div class="col-sm-6 page-item">
+                            <button type="button" class="btn btn-secondary">
+                                <a href="{{ path('ticketing_booking') }}" style="text-decoration: none">Retour</a>
+                            </button>
+                        </div>
+                        <div class="col-sm-6">
+                            <form action="{{ path ('ticketing_ckeckout') }}" method="POST">
+                                <script
+                                        src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+                                        data-key="pk_test_QGAVTYmmjlNMeq41SwQH6bz9"
+                                        data-amount="{{ order.orderAmount*100 }}"
+                                        data-name="Musée du Louvre"
+                                        data-description="Paiement en ligne"
+                                        data-image="{{ asset('images/louvre-icon.jpg') }}"
+                                        data-locale="auto"
+                                        data-zip-code="false"
+                                        data-currency="eur"
+                                        data-allow-remember-me="false">
+                                </script>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
 
 
 {% endblock %}
