@@ -9,15 +9,15 @@
 
 
     {% for message in app.session.flashbag.get('success') %}
-        <div class="alert alert-sucess">Message flash : {{ message }}</div>
+        <div class="alert alert-success">Message flash : {{ message }}</div>
     {% endfor %}
 
     <div>Le musée du Louvre vous remercie pour votre commande et sera heureux de vous accueillir le {{ order.bookingDate|date("d/m/y") }}.</div><br>
 
     {% if qty > 1 %}
-        <div>Vos e-billets ainsi que votre facture vous ont été envoyés à votre adresse email : {{ email }}.</div>
+        <div>Vos e-billets ainsi que le récapitulatif de votre commande vous ont été envoyés à votre adresse email : {{ email }}.</div>
     {% else %}
-        <div>Votre e-billet ainsi que votre facture vous ont été envoyés à votre adresse email : {{ email }}.</div>
+        <div>Votre e-billet ainsi que le récapitulatif de votre commande vous ont été envoyés à votre adresse email : {{ email }}.</div>
     {% endif %}
 
 

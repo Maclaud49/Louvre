@@ -13,6 +13,11 @@
     {% endfor %}
 
 
+    {% for message in app.session.flashbag.get('error') %}
+        <div class="alert alert-error">Message flash : {{ message }}</div>
+    {% endfor %}
+
+
 
             <div id="container">
                 <div id="welcome">

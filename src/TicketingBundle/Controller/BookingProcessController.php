@@ -38,13 +38,8 @@ class BookingProcessController extends Controller
 
             $this->get('session')->set('order',$order);
 
-            /*
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($order);
-            echo '<pre>';
-            var_dump($order->getTickets()["billet_1"]);
-            echo '</pre>';
-            $em->flush();*/
+            $qty = $order->getQuantity();
+            $this->get('session')->set('qty', $qty);
 
 
 
@@ -108,34 +103,26 @@ class BookingProcessController extends Controller
         return $this->render('TicketingBundle:BookingProcess:mailOrder.html.twig');
     }
 
-    public function checkoutAction()
+    public function checkoutAction(Request $request)
     {
-        \Stripe\Stripe::setApiKey('sk_test_my7udfLsv4JQA7TK3BqBDyTk');
-
-        // Get the credit card details submitted by the form
-        $token = $_POST['stripeToken'];
-        $email = $_POST['stripeEmail'];
-        $this->get('session')->set('email',$email);
         $order = $this->get('session')->get('order');
-        $amount = $order->getOrderAmount();
-        $qty= $order->getQuantity();
-        $this->get('session')->set('qty',$qty);
+        $stripe = $this->get('ticketing.paiement.stripe');
+        $email = $_POST['stripeEmail'];
+        $this->get('session')->set('email', $email);
 
-        // Create a charge: this will charge the user's card
         try {
-            $charge = \Stripe\Charge::create(array(
-                "amount" => $amount*100, // Amount in cents
-                "currency" => "eur",
-                "source" => $token,
-                "description" => "Paiement Stripe - OpenClassrooms Exemple"
-            ));
-            $this->addFlash("success","La transaction a été validée");
+            $stripe->paiementByStripe($order);
+            $stripe->mailTickets($order);
+            $stripe->saveOrder($order);
+            $this->addFlash("success", "La transaction a été validée");
             return $this->redirectToRoute('ticketing_summary');
-        } catch(\Stripe\Error\Card $e) {
-
-            $this->addFlash("error","La transaction n'a pas été validée");
+        } catch (\Stripe\Error\Card $e){
+            $this->addFlash("error", "La transaction n'a pas été validée");
             return $this->redirectToRoute("ticketing_paiement");
             // The card has been declined
         }
     }
+
+
+
 }

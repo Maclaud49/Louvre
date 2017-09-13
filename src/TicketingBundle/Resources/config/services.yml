@@ -1,4 +1,10 @@
 services:
-#    ticketing.example:
-#        class: TicketingBundle\Example
-#        arguments: ["@service_id", "plain_value", "%parameter%"]
+
+
+  ticketing.paiement.stripe:
+    class: TicketingBundle\Stripe\PaiementStripe
+    arguments:
+      - "@doctrine.orm.entity_manager"
+      - "@mailer"
+      - "@templating"
+      - $adminEmail: 'mickael@parlow-co.com'
