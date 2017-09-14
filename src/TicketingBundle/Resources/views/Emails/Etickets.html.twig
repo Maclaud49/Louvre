@@ -41,8 +41,8 @@
                                         <td style="text-align: center">{{ ticket.firstName }} {{ ticket.lastName }}</td>
                                         <td style="text-align: center">1</td>
                                         <td style="text-align: center">{{ ticket.Price|number_format(2, ',', '') }}€</td>
-
                                     </tr>
+                                {% endfor %}
                             </table>
                         </div>
                         <div class="table-responsive col-sm-offset-6 col-sm-6" id="totalSummary">

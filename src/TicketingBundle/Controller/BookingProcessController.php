@@ -136,9 +136,10 @@ class BookingProcessController extends Controller
     public function mailTickets(Order $order, $recipient)
     {
         $mailer = $this->container->get('mailer');
+        $from = $this->getParameter('mailer_user');
         $message = \Swift_Message::newInstance()
             ->setSubject('Justificatif pour votre visite du musée du Louvre')
-            ->setFrom('billet.simple.alaska@gmail.com')
+            ->setFrom($from)
             ->setTo($recipient)
             ->setBody($this->renderView('TicketingBundle:Emails:Etickets.html.twig', array('order' => $order)),'text/html'
             )
