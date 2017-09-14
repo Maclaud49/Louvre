@@ -18,7 +18,13 @@ class BookingProcessController extends Controller
     public function bookingAction(Request $request)
     {
 
-        $order = new Order();
+        if( $this->get('session')->get('order')==null){
+            $order = new Order();
+        }
+        else{
+            $order = $this->get('session')->get('order');
+        }
+
         $form   = $this->get('form.factory')->create(OrderType::class, $order);
 
         if ($request->isMethod('POST') && $form->handleRequest($request)->isValid()) {

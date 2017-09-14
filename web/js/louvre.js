@@ -64,17 +64,17 @@ $(function(){
     //booking-date change
     $( ".bookingDatepicker").change(function(){
         var $qty =$('#order_quantity').val();
+        $('#ticketsQtyMessage').text('');
+        $('#ticketsQtyMessage').hide(0);
+        $('#PricesInformationMessage').show(0);
+        qtyBtn();
+
         if($qty<0){
             $('#ticketsQtyMessage').text('Veuillez choisir une quantité de billet positive');
             $('#ticketsQtyMessage').show(0);
         }
         else{
-            $('#ticketsQtyMessage').text('');
-            $('#ticketsQtyMessage').hide(0);
-            $('#openDaysInformationMessage').hide();
-            $('#PricesInformationMessage').show(0);
-            $('#order_quantity').removeAttr('disabled');
-            $('#order_quantity').removeAttr('title');
+            checkQtyOfDay();
             halfDayTicket();
         }
     })
@@ -83,6 +83,13 @@ $(function(){
 
     qtyBtn();
     validateBtn();
+    var $qty =$('#order_quantity').val();
+    if($qty>0){
+        $('#PricesInformationMessage').show(0);
+        $('#resetTicketsMessageWarning').show(0);
+    }
+
+
 
     /****************************************************************************************************************/
 
@@ -91,6 +98,7 @@ $(function(){
     $('#order_quantity').change(function(){
         var $date = $( ".bookingDatepicker").val();
         var $qty =$('#order_quantity').val();
+        $('#resetTicketsMessageWarning').hide(0);
         if ($qty>0 && $date !=""){
             $('#ticketsQtyMessageWarning').text('');
             $('#ticketsQtyMessageWarning').hide(0);
@@ -170,7 +178,7 @@ function checkQtyOfDay(){
     var DATA = 'date=' + $date;
     $.ajax({
         type:"POST",
-        url:"tickets-vendus",
+        url:"billets-vendus",
         data:DATA,
         cache:false,
         dataType:'json',
@@ -222,6 +230,12 @@ function qtyBtn(){
             'disabled': 'disabled',
             'title': 'Renseignez en premier lieu la date souhaitée de votre visite'
         });
+    }
+    else{
+        $('#order_quantity').attr({
+            'title': 'Attetion : modifier la quantité réinitialise les données'
+        });
+        $('#order_quantity').removeAttr('disabled');
     }
 }
 

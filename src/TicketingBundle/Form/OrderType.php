@@ -38,7 +38,7 @@ class OrderType extends AbstractType
                 'required' => false,
                 'label_attr' =>array('id' =>'qtyLabel'),
                 'attr' => array('class' => 'text-center'),
-                'data' => 0,
+                //'data' => 0,
                     ))
             ->add('tickets', CollectionType::class,
                 array(
