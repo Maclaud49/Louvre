@@ -52,31 +52,6 @@ class OrderType extends AbstractType
 
                 ))
             ;
-
-            $builder->addEventListener(
-                FormEvents::PRE_SUBMIT,    // 1er argument : L'évènement qui nous intéresse : ici, PRE_SET_DATA
-                function(FormEvent $event) { // 2e argument : La fonction à exécuter lorsque l'évènement est déclenché
-                    // On récupère notre objet Advert sous-jacent
-                    //$order = $event->getData();
-                    //$qty = $order->getQuantity();
-                   // var_dump($order);
-
-                    /*if (null === $order) {
-                        return; // On sort de la fonction sans rien faire lorsque $advert vaut null
-                    }
-
-                    $tickets = $order->getTickets();
-                    $orderAmount = 0;
-                    foreach($tickets as $ticket){
-                        $ticket->setTicketPrice();
-                        $orderAmount += $ticket->getPrice();
-                        $order->setOrderAmount($orderAmount);
-                    }*/
-
-
-                }
-            );
-        ;
     }
 
     public function configureOptions(OptionsResolver $resolver)

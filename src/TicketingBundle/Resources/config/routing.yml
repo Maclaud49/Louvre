@@ -16,6 +16,6 @@ ticketing_summary:
     defaults: { _controller: TicketingBundle:BookingProcess:summary }
 
 ticketing_soldTicketsNb:
-    path: /tickets-vendus
+    path: /billets-vendus
     defaults: { _controller: TicketingBundle:BookingProcess:soldTicketsNb }
     methods: [POST]

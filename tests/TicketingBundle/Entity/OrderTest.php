@@ -1,12 +1,12 @@
 <?php
 
-namespace Tests\TicketingBundle\Util;
+namespace tests\TicketingBundle\Entity;
 
 use TicketingBundle\Entity\Order;
 use TicketingBundle\Entity\Ticket;
 use PHPUnit\Framework\TestCase;
-include_once __DIR__.'/../../../app/autoload.php';
-include_once __DIR__.'/../../../var/bootstrap.php.cache';
+//include_once __DIR__.'/../../../app/autoload.php';
+//include_once __DIR__.'/../../../var/bootstrap.php.cache';
 
 class OrderTest extends TestCase{
 

@@ -80,7 +80,7 @@ class BookingProcessController extends Controller
     }
 
 
-    public function paiementAction(Request $request)
+    public function paiementAction()
     {
 
         $order = $this->get('session')->get('order');
@@ -107,13 +107,23 @@ class BookingProcessController extends Controller
     {
         $order = $this->get('session')->get('order');
         $stripe = $this->get('ticketing.paiement.stripe');
-        $email = $_POST['stripeEmail'];
-        $this->get('session')->set('email', $email);
+        $recipientEmail = $request->get('stripeEmail');
+        $this->get('session')->set('email', $recipientEmail);
+        $token = $request->get('stripeToken');
+        $em = $this->getDoctrine()->getManager();
+
 
         try {
-            $stripe->paiementByStripe($order);
-            $stripe->mailTickets($order);
-            $stripe->saveOrder($order);
+            //Charge the customer
+            $stripe->paiementByStripe($order, $token);
+
+            //Send mail to the customer
+            $this->mailTickets($order,$recipientEmail);
+
+            //Save order on the bdd
+            /*$em->persist($order);
+            $em->flush();*/
+
             $this->addFlash("success", "La transaction a été validée");
             return $this->redirectToRoute('ticketing_summary');
         } catch (\Stripe\Error\Card $e){
@@ -123,6 +133,17 @@ class BookingProcessController extends Controller
         }
     }
 
-
+    public function mailTickets(Order $order, $recipient)
+    {
+        $mailer = $this->container->get('mailer');
+        $message = \Swift_Message::newInstance()
+            ->setSubject('Justificatif pour votre visite du musée du Louvre')
+            ->setFrom('billet.simple.alaska@gmail.com')
+            ->setTo($recipient)
+            ->setBody($this->renderView('TicketingBundle:Emails:Etickets.html.twig', array('order' => $order)),'text/html'
+            )
+            ->addPart($this->renderView('TicketingBundle:Emails:Etickets.text.twig', array('order' => $order)),'text/plain');
+        $mailer->send($message);
+    }
 
 }

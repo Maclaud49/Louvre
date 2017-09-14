@@ -230,7 +230,7 @@ class Ticket{
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="birthday_date", type="datetime")
+     * @ORM\Column(name="birthday_date", type="date")
      * @Assert\DateTime(
      *     message="La date n'est pas valide"
      * )

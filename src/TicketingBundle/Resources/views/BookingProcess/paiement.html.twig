@@ -18,19 +18,21 @@
     {% endfor %}
 
 
-
+    {% if order %}
             <div id="container">
                 <div id="welcome">
                     <h2>Récapitulatif de votre commande pour votre visite du musée du Louvre :</h2>
                 </div>
 
+
                 <div style="margin-top: 30px">
                     <p><strong>Date de la visite :</strong> {{ order.bookingDate|date("d/m/y") }}</p>
                 </div>
 
+
                 <div class="tab-content" id="orderSummary">
                     <div class="tab-pane fade in active adminTable">
-                        {% if order %}
+
                             <div class="table-responsive" id="ticketsSummary">
                             <table class="table table-hover table-condensed">
                                 <thead>
@@ -76,15 +78,11 @@
                                         <td class="text-center">{{ (order.orderAmount - order.orderAmount / 1.1)|number_format(2, ',', '')}}€</td>
                                     </tr>
                                     <tr>
-                                        <th class="text-center">Total de la commande</th>
+                                        <th class="text-center">Total de la commande TTC</th>
                                         <td class="text-center"><strong>{{ order.orderAmount|number_format(2, ',', '') }}€</strong></td>
                                     </tr>
                                 </table>
                             </div>
-
-                        {% else %}
-                            <div class="alert alert-warning">Pas de commande</div>
-                        {% endif %}
                     </div>
                 </div>
 
@@ -119,6 +117,19 @@
                 </div>
             </div>
 
+    {% else %}
+        <div class="alert alert-warning">Pas de commande</div>
+        <div class="row" id="paiement-navigation">
+            <div class="text-center">
+                <div class="col-sm-6 page-item">
+                    <button type="button" class="btn btn-secondary">
+                        <a href="{{ path('ticketing_booking') }}" style="text-decoration: none">Retour</a>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+    {% endif %}
 
 
 

@@ -1,0 +1,17 @@
+Récapitulatif de votre commande pour votre visite du musée du Louvre :
+
+Date de la visite : {{ order.bookingDate|date("d/m/y") }}
+
+{% for ticket in order.tickets %}
+
+        Billet : {% if  ticket.type == 1  %}Journée{% else %}Demi-journée{% endif %}
+        Tarif réduit : {% if  ticket.reducedPrice == 1  %}Oui{% else %}Non{% endif %}
+        Nomination : {{ ticket.firstName }} {{ ticket.lastName }}
+        Quantité : 1
+        Tarif retenu : {{ ticket.Price|number_format(2, ',', '') }}€
+
+{% endfor %}
+
+Total HT : {{ (order.orderAmount / 1.1)|number_format(2, ',', '') }}€
+Total TVA (10,00%) : {{ (order.orderAmount - order.orderAmount / 1.1)|number_format(2, ',', '')}}€
+Total de la commande : {{ order.orderAmount|number_format(2, ',', '') }}€

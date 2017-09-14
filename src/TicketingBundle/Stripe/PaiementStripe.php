@@ -9,30 +9,24 @@ use TicketingBundle\TicketingBundle;
 
 class PaiementStripe{
 
-    //EntityManagerInterface
-    private $em;
-    //Mailer
-    private $mailer;
-    //Template
-    private $templating;
+    private $APIKey;
 
-    public function  __construct(EntityManagerInterface $em, \Swift_Mailer $mailer, EngineInterface $templating){
+    public function  __construct(String $APIKey){
 
-        $this->em = $em;
-        $this->mailer = $mailer;
-        $this->templating = $templating;
-
+        $this->APIKey = $APIKey;
     }
 
-    public function paiementByStripe(Order $order)
+    /**
+     * @param Order $order
+     * @param String $token
+     * Create a charge to the user's card
+     */
+    public function paiementByStripe(Order $order, String $token)
     {
-        \Stripe\Stripe::setApiKey('sk_test_my7udfLsv4JQA7TK3BqBDyTk');
+        \Stripe\Stripe::setApiKey($this->APIKey);
 
-        // Get the credit card details submitted by the form
-        $token = $_POST['stripeToken'];
         $amount = $order->getOrderAmount();
 
-        // Create a charge: this will charge the user's card
             $charge = \Stripe\Charge::create(array(
                 "amount" => $amount * 100, // Amount in cents
                 "currency" => "eur",
@@ -42,23 +36,6 @@ class PaiementStripe{
     }
 
 
-        public function mailTickets(Order $order)
-        {
-            $recipient = $_POST['stripeEmail'];
 
-            $message = \Swift_Message::newInstance()
-                ->setSubject('Justificatif pour votre visite du musée du Louvre')
-                ->setFrom('billet.simple.alaska@gmail.com')
-                ->setTo($recipient)
-                ->setBody($this->templating->render('TicketingBundle:Emails:Etickets.html.twig', array('order' => $order)),'text/html'
-                );
-            $this->mailer->send($message);
-        }
-
-        public function saveOrder(Order $order)
-        {
-                    $this->em->persist($order);
-                    $this->em->flush();
-        }
 
 }

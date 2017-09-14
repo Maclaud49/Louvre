@@ -12,13 +12,16 @@
         <div class="alert alert-success">Message flash : {{ message }}</div>
     {% endfor %}
 
+    {% if order %}
     <div>Le musée du Louvre vous remercie pour votre commande et sera heureux de vous accueillir le {{ order.bookingDate|date("d/m/y") }}.</div><br>
+    {% endif %}
 
+    {% if email %}
     {% if qty > 1 %}
         <div>Vos e-billets ainsi que le récapitulatif de votre commande vous ont été envoyés à votre adresse email : {{ email }}.</div>
     {% else %}
         <div>Votre e-billet ainsi que le récapitulatif de votre commande vous ont été envoyés à votre adresse email : {{ email }}.</div>
     {% endif %}
-
+    {% endif %}
 
 {% endblock %}

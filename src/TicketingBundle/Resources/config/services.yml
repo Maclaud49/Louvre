@@ -4,7 +4,4 @@ services:
   ticketing.paiement.stripe:
     class: TicketingBundle\Stripe\PaiementStripe
     arguments:
-      - "@doctrine.orm.entity_manager"
-      - "@mailer"
-      - "@templating"
-      - $adminEmail: 'mickael@parlow-co.com'
+      - "%stripeAPIKey%"
