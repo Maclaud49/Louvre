@@ -2,10 +2,8 @@
 
 namespace TicketingBundle\Stripe;
 
-use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Component\Templating\EngineInterface;
 use TicketingBundle\Entity\Order;
-use TicketingBundle\TicketingBundle;
+
 
 class PaiementStripe{
 

@@ -1,7 +1,12 @@
 services:
 
-
   ticketing.paiement.stripe:
     class: TicketingBundle\Stripe\PaiementStripe
     arguments:
       - "%stripeAPIKey%"
+
+  ticketing.mail.swiftmailer:
+      class: TicketingBundle\Mailer\MailBySwiftmailer
+      arguments:
+       - "@mailer"
+       - "@twig"

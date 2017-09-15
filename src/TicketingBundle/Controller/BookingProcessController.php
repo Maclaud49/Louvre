@@ -117,6 +117,8 @@ class BookingProcessController extends Controller
         $this->get('session')->set('email', $recipientEmail);
         $token = $request->get('stripeToken');
         $em = $this->getDoctrine()->getManager();
+        $mailer = $this->get('ticketing.mail.swiftmailer');
+        $from = $this->getParameter('mailer_user');
 
 
         try {
@@ -124,7 +126,7 @@ class BookingProcessController extends Controller
             $stripe->paiementByStripe($order, $token);
 
             //Send mail to the customer
-            $this->mailTickets($order,$recipientEmail);
+            $mailer->mailTickets($order,$recipientEmail, $from);
 
             //Save order on the bdd
             /*$em->persist($order);
@@ -139,18 +141,6 @@ class BookingProcessController extends Controller
         }
     }
 
-    public function mailTickets(Order $order, $recipient)
-    {
-        $mailer = $this->container->get('mailer');
-        $from = $this->getParameter('mailer_user');
-        $message = \Swift_Message::newInstance()
-            ->setSubject('Justificatif pour votre visite du musée du Louvre')
-            ->setFrom($from)
-            ->setTo($recipient)
-            ->setBody($this->renderView('TicketingBundle:Emails:Etickets.html.twig', array('order' => $order)),'text/html'
-            )
-            ->addPart($this->renderView('TicketingBundle:Emails:Etickets.text.twig', array('order' => $order)),'text/plain');
-        $mailer->send($message);
-    }
+
 
 }
