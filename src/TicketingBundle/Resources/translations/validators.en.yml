@@ -1,0 +1,3 @@
+entity.not_blank: This field cannot be empty
+entity.min.message: Input at least 2 letters
+entity.max.message: Max 50 letters

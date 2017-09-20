@@ -27,7 +27,6 @@ hr{
 }
 
 
-
 /*Top-banner */
 .thumbnail {
     position: relative;
@@ -64,10 +63,6 @@ hr{
 }
 
 /*Messages d'information*/
-
-#openDaysInformationMessage{
-
-}
 
 #PricesInformationMessage{
     display:none;

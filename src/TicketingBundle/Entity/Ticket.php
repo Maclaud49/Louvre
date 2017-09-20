@@ -216,14 +216,16 @@ class Ticket{
     /**
      * @var string
      * @ORM\Column(name="lastName", type="string", length=255)
-     * @Assert\Length(min=2,max=20,minMessage="Veuillez saisir au moins 2 lettres",maxMessage="50 lettres maximum")
+     * @Assert\Length(min=2,max=20,minMessage="entity.min.message",maxMessage="entity.max.message")
+     * @Assert\NotBlank(message = "entity.not_blank")
      */
     private $lastName;
 
     /**
      * @var string
      * @ORM\Column(name="firstName", type="string", length=255)
-     * @Assert\Length(min=2,max=20,minMessage="Veuillez saisir au moins 2 lettres",maxMessage="50 lettres maximum")
+     * @Assert\Length(min=2,max=20,minMessage="entity.min.message",maxMessage="entity.max.message")
+     * @Assert\NotBlank(message = "entity.not_blank")
      */
     private $firstName;
 
@@ -231,16 +233,16 @@ class Ticket{
      * @var \DateTime
      *
      * @ORM\Column(name="birthday_date", type="date")
-     * @Assert\DateTime(
-     *     message="La date n'est pas valide"
-     * )
+     * @Assert\DateTime(message="La date n'est pas valide")
+     * @Assert\NotBlank(message = "entity.not_blank")
      */
     private $birthdayDate;
 
     /**
      * @var string
      * @ORM\Column(name="country", type="string", length=255)
-     * @Assert\Length(min=2,max=20,minMessage="Veuillez saisir au moins 2 lettres",maxMessage="50 lettres maximum")
+     * @Assert\Length(min=2,max=20,minMessage="entity.min.message",maxMessage="entity.max.message")
+     * @Assert\NotBlank(message = "entity.not_blank")
      */
     private $country;
 

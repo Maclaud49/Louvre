@@ -36,20 +36,21 @@ class TicketType extends AbstractType
             ->add('firstName',TextType::class,
                 array(
                     'label' => 'Nom',
-                    'attr' => array('class' => 'text-center'),
-                    'required' => true,
+                    'attr' => array('class' => 'text-center requiredMessage','oninvalid'=>"this.setCustomValidity('Veuillez remplir ce champ')", 'oninput'=>"setCustomValidity(' ')"),
+                    //'required' => true,
                 ))
             ->add('lastName', TextType::class,
                 array(
                     'label' =>'Prénom',
-                    'attr' => array('class' => 'text-center'),
-                    'required' => true,
+                    'attr' => array('class' => 'text-center requiredMessage','oninvalid'=>"this.setCustomValidity('Veuillez remplir ce champ')", 'oninput'=>"setCustomValidity(' ')"),
+                    //'required' => true,
                 ))
             ->add('country', TextType::class,
                 array(
                     'label' =>'Pays',
-                    'attr' => array('class' => 'text-center'),
+                    'attr' => array('class' => 'text-center requiredMessage','oninvalid'=>"this.setCustomValidity('Veuillez remplir ce champ')", 'oninput'=>"setCustomValidity(' ')" ),
                     'required' => true,
+
                 ))
             ->add('birthdayDate', BirthdayType::class,
                 array(
@@ -58,7 +59,6 @@ class TicketType extends AbstractType
                     'required' => true,
                     'widget' => 'choice',
                     'html5' => true,
-                    'invalid_message' =>"La date est invalide",
                     'format' => 'dd-MM-yyyy',
                     'placeholder' => array(
                         'year' => 'Année', 'month' => 'Mois', 'day' => 'Jour')
@@ -66,7 +66,8 @@ class TicketType extends AbstractType
             ->add('reducedPrice', CheckboxType::class,
                 array(
                     'label' =>'Tarif réduit',
-                    'label_attr' =>array('title' =>'un justificatif sera demandé à l\'entrée du musée'),
+                    'attr' => array('id' => 'reducedPrice'),
+
                     'required' => false
                 ))
         ;

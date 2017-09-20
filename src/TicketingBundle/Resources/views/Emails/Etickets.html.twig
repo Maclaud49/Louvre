@@ -3,12 +3,12 @@
     <div style="display:flex;flex-direction:column;justify-content:center;align-items:center;">
         <div id="container">
             <div id="welcome">
-                <h2>Récapitulatif de votre commande pour votre visite du musée du Louvre :</h2>
+                <h2>{% trans %}Récapitulatif de votre commande pour votre visite du musée du Louvre :{% endtrans %}</h2>
             </div>
 
             <div style="margin-top: 30px">
-                <p><strong>Date de la visite :</strong> {{ order.bookingDate|date("d/m/y") }}</p>
-                <p><strong>Référence de la commande :</strong>  {{ order.bookingCode }}</p>
+                <p><strong>{% trans %}Date de la visite :{% endtrans %}</strong> {{ order.bookingDate|date("d/m/y") }}</p>
+                <p><strong>{% trans %}Référence de la commande :{% endtrans %}</strong>  {{ order.bookingCode }}</p>
             </div>
 
             <div class="tab-content" id="orderSummary">
@@ -17,25 +17,25 @@
                             <table class="table table-hover table-condensed">
                                 <thead>
                                 <tr>
-                                    <th style="text-align: center">Billet</th>
-                                    <th style="text-align: center">Tarif réduit</th>
-                                    <th style="text-align: center">Nomination</th>
-                                    <th style="text-align: center">Quantité</th>
-                                    <th style="text-align: center">Tarif retenu</th>
+                                    <th style="text-align: center">{% trans %}Billet{% endtrans %}</th>
+                                    <th style="text-align: center">{% trans %}Tarif réduit{% endtrans %}</th>
+                                    <th style="text-align: center">{% trans %}Nomination{% endtrans %}</th>
+                                    <th style="text-align: center">{% trans %}Quantité{% endtrans %}</th>
+                                    <th style="text-align: center">{% trans %}Tarif retenu{% endtrans %}</th>
                                 </tr>
                                 </thead>
                                 {% for ticket in order.tickets %}
                                     <tr>
                                         <td>{% if  ticket.type == 1  %}
-                                                <p style="text-align: center">Journée</p>
+                                                <p style="text-align: center">{% trans %}Journée{% endtrans %}</p>
                                             {% else %}
-                                                <p style="text-align: center">Demi-journée</p>
+                                                <p style="text-align: center">{% trans %}Demi-journée{% endtrans %}</p>
                                             {% endif %}
                                         </td>
                                         <td>{% if  ticket.reducedPrice == 1  %}
-                                                <p style="text-align: center">Oui</p>
+                                                <p style="text-align: center">{% trans %}Oui{% endtrans %}</p>
                                             {% else %}
-                                                <p style="text-align: center">Non</p>
+                                                <p style="text-align: center">{% trans %}Non{% endtrans %}</p>
                                             {% endif %}
                                         </td>
                                         <td style="text-align: center">{{ ticket.firstName }} {{ ticket.lastName }}</td>
@@ -49,15 +49,15 @@
                             <table class="table table-hover table-condensed">
 
                                 <tr>
-                                    <th class="text-center" style="font-weight: normal;">Total HT</th>
+                                    <th class="text-center" style="font-weight: normal;">{% trans %}Total HT{% endtrans %}</th>
                                     <td class="text-center">{{ (order.orderAmount / 1.1)|number_format(2, ',', '') }}€</td>
                                 </tr>
                                 <tr>
-                                    <th class="text-center" style="font-weight: normal;">Total TVA (10,00%)</th>
+                                    <th class="text-center" style="font-weight: normal;">{% trans %}Total TVA (10,00%){% endtrans %}</th>
                                     <td class="text-center">{{ (order.orderAmount - order.orderAmount / 1.1)|number_format(2, ',', '')}}€</td>
                                 </tr>
                                 <tr>
-                                    <th class="text-center">Total de la commande</th>
+                                    <th class="text-center">{% trans %}Total de la commande{% endtrans %}</th>
                                     <td class="text-center"><strong>{{ order.orderAmount|number_format(2, ',', '') }}€</strong></td>
                                 </tr>
                             </table>
@@ -67,9 +67,9 @@
 
 
 
-            <p>Nous vous souhaitons une très bonne visite du musée !</p>
+            <p>{% trans %}Nous vous souhaitons une très bonne visite du musée !{% endtrans %}</p>
 
-            <p>--  L'équipe du musée du Louvre  --</p>
+            <p>--  {% trans %}L'équipe du musée du Louvre{% endtrans %}  --</p>
         </div>
     </div>
 

@@ -19,6 +19,7 @@ class MailBySwiftmailer{
 
         $body = $this->renderTemplateHTML($order);
         $part = $this->renderTemplateText($order);
+        
 
         $message = \Swift_Message::newInstance()
             ->setSubject('Justificatif pour votre visite du musée du Louvre')

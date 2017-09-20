@@ -26,14 +26,12 @@ class OrderType extends AbstractType
                     'widget' => 'single_text',
                     'html5' =>false,
                     'attr' => array('class' => 'bookingDatepicker text-center'),
-                    'invalid_message' =>"La date est invalide",
                     'required' => false,
                     'format' => 'dd/MM/yyyy'
                 ))
 
             ->add('quantity', IntegerType::class,
                 array(
-                'invalid_message' =>'Merci de saisir un chiffre compris entre 1 et 100',
                 'label' =>'Quantité désirée',
                 'required' => false,
                 'label_attr' =>array('id' =>'qtyLabel'),

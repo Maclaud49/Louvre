@@ -1,7 +1,7 @@
 {% extends "TicketingBundle::layout.html.twig" %}
 
 {% block title %}
-    {{ parent() }} - Paiement
+    {{ parent() }} - {% trans %}Paiement{% endtrans %}
 {% endblock %}
 
 {% block content %}
@@ -9,24 +9,24 @@
 
 
     {% for message in app.session.flashbag.get('info') %}
-        <div class="alert alert-info">Message flash : {{ message }}</div>
+        <div class="alert alert-info">Message flash : {{ message|trans }}</div>
     {% endfor %}
 
 
     {% for message in app.session.flashbag.get('error') %}
-        <div class="alert alert-error">Message flash : {{ message }}</div>
+        <div class="alert alert-error">Message flash : {{ message|trans }}</div>
     {% endfor %}
 
 
     {% if order %}
             <div id="container">
                 <div id="welcome">
-                    <h2>Récapitulatif de votre commande pour votre visite du musée du Louvre :</h2>
+                    <h2>{% trans %}Récapitulatif de votre commande pour votre visite du musée du Louvre :{% endtrans %}</h2>
                 </div>
 
 
                 <div style="margin-top: 30px">
-                    <p><strong>Date de la visite :</strong> {{ order.bookingDate|date("d/m/y") }}</p>
+                    <p><strong>{% trans %}Date de la visite :{% endtrans %}</strong> {{ order.bookingDate|date("d/m/y") }}</p>
                 </div>
 
 
@@ -37,25 +37,25 @@
                             <table class="table table-hover table-condensed">
                                 <thead>
                                 <tr>
-                                    <th class="text-center">Billet</th>
-                                    <th class="text-center">Tarif réduit</th>
-                                    <th class="text-center">Nomination</th>
-                                    <th class="text-center">Quantité</th>
-                                    <th class="text-center">Tarif retenu</th>
+                                    <th class="text-center">{% trans %}Billet{% endtrans %}</th>
+                                    <th class="text-center">{% trans %}Tarif réduit{% endtrans %}</th>
+                                    <th class="text-center">{% trans %}Nomination{% endtrans %}</th>
+                                    <th class="text-center">{% trans %}Quantité{% endtrans %}</th>
+                                    <th class="text-center">{% trans %}Tarif retenu{% endtrans %}</th>
                                 </tr>
                                 </thead>
                                 {% for ticket in order.tickets %}
                                     <tr>
                                         <td>{% if  ticket.type == 1  %}
-                                                <p>Journée</p>
+                                                <p>{% trans %}Journée{% endtrans %}</p>
                                             {% else %}
-                                                <p>Demi-journée</p>
+                                                <p>{% trans %}Demi-journée{% endtrans %}</p>
                                             {% endif %}
                                         </td>
                                         <td>{% if  ticket.reducedPrice == 1  %}
-                                                <p>Oui</p>
+                                                <p>{% trans %}Oui{% endtrans %}</p>
                                             {% else %}
-                                                <p>Non</p>
+                                                <p>{% trans %}Non{% endtrans %}</p>
                                             {% endif %}
                                         </td>
                                         <td class="text-center">{{ ticket.firstName }} {{ ticket.lastName }}</td>
@@ -70,15 +70,15 @@
                                 <table class="table table-hover table-condensed">
 
                                     <tr>
-                                        <th class="text-center" style="font-weight: normal;">Total HT</th>
+                                        <th class="text-center" style="font-weight: normal;">{% trans %}Total HT{% endtrans %}</th>
                                         <td class="text-center">{{ (order.orderAmount / 1.1)|number_format(2, ',', '') }}€</td>
                                     </tr>
                                     <tr>
-                                        <th class="text-center" style="font-weight: normal;">Total TVA (10,00%)</th>
+                                        <th class="text-center" style="font-weight: normal;">{% trans %}Total TVA (10,00%){% endtrans %}</th>
                                         <td class="text-center">{{ (order.orderAmount - order.orderAmount / 1.1)|number_format(2, ',', '')}}€</td>
                                     </tr>
                                     <tr>
-                                        <th class="text-center">Total de la commande TTC</th>
+                                        <th class="text-center">{% trans %}Total de la commande TTC{% endtrans %}</th>
                                         <td class="text-center"><strong>{{ order.orderAmount|number_format(2, ',', '') }}€</strong></td>
                                     </tr>
                                 </table>
@@ -94,7 +94,7 @@
                     <div class="text-center">
                         <div class="col-sm-6 page-item">
                             <button type="button" class="btn btn-secondary">
-                                <a href="{{ path('ticketing_booking') }}" style="text-decoration: none">Modifier mes informations</a>
+                                <a href="{{ path('ticketing_booking') }}" style="text-decoration: none">{% trans %}Modifier mes informations{% endtrans %}</a>
                             </button>
                         </div>
                         <div class="col-sm-6">
@@ -103,12 +103,13 @@
                                         src="https://checkout.stripe.com/checkout.js" class="stripe-button"
                                         data-key="pk_test_QGAVTYmmjlNMeq41SwQH6bz9"
                                         data-amount="{{ order.orderAmount*100 }}"
-                                        data-name="Musée du Louvre"
-                                        data-description="Paiement en ligne"
+                                        data-name="{% trans %}Musée du Louvre{% endtrans %}"
+                                        data-description="{% trans %}Paiement en ligne{% endtrans %}"
                                         data-image="{{ asset('images/louvre-icon.jpg') }}"
                                         data-locale="auto"
                                         data-zip-code="false"
                                         data-currency="eur"
+                                        data-label="{% trans %}Paiement par carte{% endtrans %}"
                                         data-allow-remember-me="false">
                                 </script>
                             </form>
@@ -118,12 +119,12 @@
             </div>
 
     {% else %}
-        <div class="alert alert-warning">Pas de commande</div>
+        <div class="alert alert-warning">{% trans %}Pas de commande{% endtrans %}</div>
         <div class="row" id="paiement-navigation">
             <div class="text-center">
                 <div class="col-sm-6 page-item">
                     <button type="button" class="btn btn-secondary">
-                        <a href="{{ path('ticketing_booking') }}" style="text-decoration: none">Retour</a>
+                        <a href="{{ path('ticketing_booking') }}" style="text-decoration: none">{% trans %}Retour{% endtrans %}</a>
                     </button>
                 </div>
             </div>

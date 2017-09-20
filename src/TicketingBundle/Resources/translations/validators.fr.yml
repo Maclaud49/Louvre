@@ -1,0 +1,3 @@
+entity.not_blank: Ce champ ne peut être vide
+entity.min.message: Veuillez saisir au moins 2 lettres
+entity.max.message: Max de 50 lettres

@@ -144,7 +144,6 @@ class Order
      * @var \DateTime
      *
      * @ORM\Column(name="bookingDate", type="date")
-     * @Assert\DateTime(message="La date choisie n'est pas valide")
      */
     private $bookingDate;
 

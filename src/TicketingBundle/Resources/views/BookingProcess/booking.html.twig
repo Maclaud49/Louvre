@@ -1,7 +1,7 @@
 {% extends "TicketingBundle::layout.html.twig" %}
 
 {% block title %}
-    {{ parent() }} - Réservation
+    {{ parent() }} - {% trans %}Réservation{% endtrans %}
 {% endblock %}
 
 {% block content %}
@@ -9,33 +9,33 @@
 
 
     {% for message in app.session.flashbag.get('info') %}
-        <div class="alert alert-info">Message flash : {{ message }}</div>
+        <div class="alert alert-info">Message flash : {{ message |trans }}</div>
     {% endfor %}
 
     <div id="openDaysInformationMessage">
-        <h2>Informations</h2>
-        <p>Le musée du Louvre est ouvert tous les jours sauf : <br>les mardis, dimanches et jours fériés.</p>
+        <h2>{% trans %}Information{% endtrans %}</h2>
+        <p>{% trans %}Le musée du Louvre est ouvert tous les jours sauf :{% endtrans %} <br>{% trans %}les mardis, dimanches et jours fériés.{% endtrans %}</p>
     </div>
 
     <div id="PricesInformationMessage">
-        <h2>Tarifications</h2>
+        <h2>{% trans %}Tarifications{% endtrans %}</h2>
         <ul class="list-group">
-            <li class="list-group-item"><strong>Tarif normal :</strong> 16€  (à partir de 12 ans)</li>
-            <li class="list-group-item"><strong>Tarif enfant :</strong> 8 €  (pour les 4 à 12 ans)</li>
-            <li class="list-group-item"><strong>Tarif sénior :</strong> 12€ (à partir de 60 ans)</li>
-            <li class="list-group-item"><strong>Tarif réduit :</strong> 10€ (Etudiants, employé du musée, militaire)</li>
-            <li class="list-group-item"><strong>Billet demi-journée :</strong> 10€ </li>
-            <li class="list-group-item"><em>Gratuit pour les moins de 4 ans</em></li>
+            <li class="list-group-item"><strong>{% trans %}Tarif normal :{% endtrans %} </strong> 16€  {% trans %}(à partir de 12 ans){% endtrans %}</li>
+            <li class="list-group-item"><strong>{% trans %}Tarif enfant :{% endtrans %} </strong> 8 €  {% trans %}(pour les 4 à 12 ans){% endtrans %}</li>
+            <li class="list-group-item"><strong>{% trans %}Tarif sénior :{% endtrans %} </strong> 12€ {% trans %}(à partir de 60 ans){% endtrans %}</li>
+            <li class="list-group-item"><strong>{% trans %}Tarif réduit :{% endtrans %} </strong> 10€ {% trans %}(étudiants, employés du musée, militaires){% endtrans %}</li>
+            <li class="list-group-item"><strong>{% trans %}Billet demi-journée :{% endtrans %} </strong> 10€ </li>
+            <li class="list-group-item"><em>{% trans %}Gratuit pour les moins de 4 ans{% endtrans %}</em></li>
         </ul>
     </div>
 
-    <div id="ticketsQtyMessageWarning" class="alert alert-warning text-center" style="display:none"></div>
-    <div id="ticketsQtyMessageInfo" class="alert alert-info text-center" style="display:none"><p><strong>Info stock : </strong> il reste suffisament de billets pour votre commande pour la date choisie.</p></div>
-    <div id="resetTicketsMessageWarning" class="alert alert-warning text-center" style="display:none"><strong>Attention : </strong> modifier la quantité de tickets réinitialise les données.</div>
+    <div id="ticketsQtyMessageWarning" class="alert alert-warning text-center" style="display:none">{% trans %}Veuillez choisir une quantité de billet positive{% endtrans %}</div>
+    <div id="ticketsQtyMessageInfo" class="alert alert-info text-center" style="display:none"><p><strong>{% trans %}Info stock :{% endtrans %} </strong> {% trans %}il reste suffisament de billets pour votre commande pour la date choisie.{% endtrans %}</p></div>
+    <div id="resetTicketsMessageWarning" class="alert alert-warning text-center" style="display:none"><strong>{% trans %}Attention :{% endtrans %} </strong> {% trans %}modifier la quantité de tickets réinitialise les données.{% endtrans %}</div>
 
     <div id="loadingSpinner" style="display:none;margin-bottom:10px">
         <button class="btn btn-sm btn-warning">
-            <span class="glyphicon glyphicon-refresh glyphicon-refresh-animate"></span> Vérification disponibilité...
+            <span class="glyphicon glyphicon-refresh glyphicon-refresh-animate"></span> {% trans %}Vérification disponibilité...{% endtrans %}
         </button>
     </div>
 

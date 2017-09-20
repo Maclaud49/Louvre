@@ -2,15 +2,13 @@
 
 namespace TicketingBundle\Controller;
 
-use Stripe\Stripe;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use TicketingBundle\Entity\Order;
-use TicketingBundle\Entity\Ticket;
 use TicketingBundle\Form\OrderType;
 use Symfony\Component\HttpFoundation\Request;
-use TicketingBundle\Repository\OrderRepository;
 use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Component\HttpFoundation\Response;
+
+
 
 
 class BookingProcessController extends Controller
@@ -23,6 +21,8 @@ class BookingProcessController extends Controller
         }
         else{
             $order = $this->get('session')->get('order');
+            $orderNew = new Order();
+            $this->get('session')->set('order',$orderNew);
         }
 
         $form   = $this->get('form.factory')->create(OrderType::class, $order);

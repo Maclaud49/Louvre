@@ -1,17 +1,17 @@
-Récapitulatif de votre commande pour votre visite du musée du Louvre :
+{% trans %}Récapitulatif de votre commande pour votre visite du musée du Louvre :{% endtrans %}
 
-Date de la visite : {{ order.bookingDate|date("d/m/y") }}
+{% trans %}Date de la visite :{% endtrans %} {{ order.bookingDate|date("d/m/y") }}
 
 {% for ticket in order.tickets %}
 
-        Billet : {% if  ticket.type == 1  %}Journée{% else %}Demi-journée{% endif %}
-        Tarif réduit : {% if  ticket.reducedPrice == 1  %}Oui{% else %}Non{% endif %}
-        Nomination : {{ ticket.firstName }} {{ ticket.lastName }}
-        Quantité : 1
-        Tarif retenu : {{ ticket.Price|number_format(2, ',', '') }}€
+    {% trans %}Billet{% endtrans %} : {% if  ticket.type == 1  %}{% trans %}Journée{% endtrans %}{% else %}{% trans %}Demi-journée{% endtrans %}{% endif %}
+    {% trans %}Tarif réduit{% endtrans %} : {% if  ticket.reducedPrice == 1  %}{% trans %}Oui{% endtrans %}{% else %}{% trans %}Non{% endtrans %}{% endif %}
+    {% trans %}Nomination{% endtrans %} : {{ ticket.firstName }} {{ ticket.lastName }}
+    {% trans %}Quantité{% endtrans %} : 1
+    {% trans %}Tarif retenu{% endtrans %} : {{ ticket.Price|number_format(2, ',', '') }}€
 
 {% endfor %}
 
-Total HT : {{ (order.orderAmount / 1.1)|number_format(2, ',', '') }}€
-Total TVA (10,00%) : {{ (order.orderAmount - order.orderAmount / 1.1)|number_format(2, ',', '')}}€
-Total de la commande : {{ order.orderAmount|number_format(2, ',', '') }}€
+{% trans %}Total HT{% endtrans %} : {{ (order.orderAmount / 1.1)|number_format(2, ',', '') }}€
+{% trans %}Total TVA (10,00%){% endtrans %} : {{ (order.orderAmount - order.orderAmount / 1.1)|number_format(2, ',', '')}}€
+{% trans %}Total de la commande{% endtrans %} : {{ order.orderAmount|number_format(2, ',', '') }}€
