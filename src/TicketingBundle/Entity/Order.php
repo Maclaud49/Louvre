@@ -218,4 +218,17 @@ class Order
     return $random_code;
     }
 
+    public function fromArray($data = array())
+    {
+        foreach ($data as $property => $value) {
+            if($property == 'tickets'){
+                $method = "addTicket";
+            }
+            else {
+                $method = "set{$property}";
+            }
+            $this->$method($value);
+        }
+    }
+
 }

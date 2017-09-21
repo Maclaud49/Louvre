@@ -1,7 +1,7 @@
 {% form_theme form 'bootstrap_3_layout.html.twig' %}
 
 <div class="well">
-    {{ form_start(form) }}
+    {{ form_start(form, {'attr':{'class':'orderForm'}}) }}
 
     {{ form_row(form.bookingDate)}}
 

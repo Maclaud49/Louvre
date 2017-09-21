@@ -47,7 +47,7 @@ class BookingProcessController extends Controller
             $qty = $order->getQuantity();
             $this->get('session')->set('qty', $qty);
 
-
+            var_dump($order);
 
             return $this->redirectToRoute('ticketing_paiement'
             );

@@ -48,6 +48,7 @@ class OrderType extends AbstractType
                     'error_bubbling' => false,
                     'label'=> false,
 
+
                 ))
             ;
     }
@@ -57,5 +58,10 @@ class OrderType extends AbstractType
         $resolver->setDefaults(array(
             'data_class' => 'TicketingBundle\Entity\Order'
         ));
+    }
+
+    public function getName()
+    {
+        return 'order';
     }
 }

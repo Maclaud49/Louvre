@@ -36,20 +36,21 @@ class TicketType extends AbstractType
             ->add('firstName',TextType::class,
                 array(
                     'label' => 'Nom',
-                    'attr' => array('class' => 'text-center requiredMessage','oninvalid'=>"this.setCustomValidity('Veuillez remplir ce champ')", 'oninput'=>"setCustomValidity(' ')"),
+                    'attr' => array('class' => 'text-center requiredMessage'),
                     //'required' => true,
                 ))
             ->add('lastName', TextType::class,
                 array(
                     'label' =>'Prénom',
-                    'attr' => array('class' => 'text-center requiredMessage','oninvalid'=>"this.setCustomValidity('Veuillez remplir ce champ')", 'oninput'=>"setCustomValidity(' ')"),
+                    'attr' => array('class' => 'text-center requiredMessage'),
                     //'required' => true,
                 ))
             ->add('country', TextType::class,
                 array(
                     'label' =>'Pays',
-                    'attr' => array('class' => 'text-center requiredMessage','oninvalid'=>"this.setCustomValidity('Veuillez remplir ce champ')", 'oninput'=>"setCustomValidity(' ')" ),
+                    'attr' => array('class' => 'text-center requiredMessage' ),
                     'required' => true,
+                    //'oninvalid'=>"this.setCustomValidity('Veuillez remplir ce champ')", 'oninput'=>"setCustomValidity(' ')"
 
                 ))
             ->add('birthdayDate', BirthdayType::class,
@@ -79,5 +80,10 @@ class TicketType extends AbstractType
         $resolver->setDefaults(array(
             'data_class' => 'TicketingBundle\Entity\Ticket'
         ));
+    }
+
+    public function getName()
+    {
+        return 'ticket';
     }
 }

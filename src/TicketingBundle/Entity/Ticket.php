@@ -253,4 +253,12 @@ class Ticket{
     public function setTicketPrice(){
         $this->setPrice(16);
     }
+
+    public function fromArray($data = array())
+    {
+        foreach ($data as $property => $value) {
+            $method = "set{$property}";
+            $this->$method($value);
+        }
+    }
 }
