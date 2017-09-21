@@ -23,10 +23,11 @@ class TicketType extends AbstractType
             ->add('type',      ChoiceType::class,
                 array(
                     'choices' => array(
-                    'Billet journée' => true,
-                    'Billet demi-journée' =>false,
+                    'ticketing.form.other.fullday' => true,
+                    'ticketing.form.other.halfday' =>false,
                 ),
-                    'label' => 'Type de billet',
+                    'label' => 'ticketing.form.label.type',
+                    'required' =>true,
                     'label_attr' => array('class' => 'fullOrHalfDay'),
                     'choice_attr' =>function($val,$key,$index){
                        return['class' => 'halfOrFull_'.$index];
@@ -35,19 +36,19 @@ class TicketType extends AbstractType
             ))
             ->add('firstName',TextType::class,
                 array(
-                    'label' => 'Nom',
+                    'label' => 'ticketing.form.label.firstName',
                     'attr' => array('class' => 'text-center requiredMessage'),
-                    //'required' => true,
+                    'required' => true,
                 ))
             ->add('lastName', TextType::class,
                 array(
-                    'label' =>'Prénom',
+                    'label' =>'ticketing.form.label.lastName',
                     'attr' => array('class' => 'text-center requiredMessage'),
-                    //'required' => true,
+                    'required' => true,
                 ))
             ->add('country', TextType::class,
                 array(
-                    'label' =>'Pays',
+                    'label' =>'ticketing.form.label.country',
                     'attr' => array('class' => 'text-center requiredMessage' ),
                     'required' => true,
                     //'oninvalid'=>"this.setCustomValidity('Veuillez remplir ce champ')", 'oninput'=>"setCustomValidity(' ')"
@@ -55,18 +56,18 @@ class TicketType extends AbstractType
                 ))
             ->add('birthdayDate', BirthdayType::class,
                 array(
-                    'label' =>'Date de naissance',
+                    'label' =>'ticketing.form.label.birthday',
                     'attr' => array('class' => 'text-center'),
                     'required' => true,
                     'widget' => 'choice',
                     'html5' => true,
                     'format' => 'dd-MM-yyyy',
                     'placeholder' => array(
-                        'year' => 'Année', 'month' => 'Mois', 'day' => 'Jour')
+                        'year' => 'ticketing.form.other.year', 'month' => 'ticketing.form.other.month', 'day' => 'ticketing.form.other.day')
                 ))
             ->add('reducedPrice', CheckboxType::class,
                 array(
-                    'label' =>'Tarif réduit',
+                    'label' =>'ticketing.form.label.reducedPrice',
                     'attr' => array('id' => 'reducedPrice'),
 
                     'required' => false

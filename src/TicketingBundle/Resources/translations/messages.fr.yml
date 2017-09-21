@@ -1,19 +1,88 @@
 ticketing:
-  order:
-
-  ticket:
 
   layout:
+    ticketing: Billeterie
+    welcome: Bienvenue sur la billeterie du musée du Louvre
 
   bookingPage:
+    booking: Réservation
+    information: Information
+    closedDaysSentence: Le musée du Louvre est ouvert tous les jours sauf :
+    closedDays: les mardis, dimanches et jours fériés.
+    ticketPricing: Tarification
+    fullFare: Tarif normal :
+    childFare: Tarif enfant :
+    seniorFare: Tarif sénior :
+    reducedFare: Tarif réduit :
+    halfDayFare: Billet demi-journée :
+    free: Gratuit pour les moins de 4 ans
+    from12: (à partir de 12 ans)
+    from4: (pour les 4 à 12 ans)
+    from60: (à partir de 60 ans)
+    credential: (étudiants, employés du musée, militaires)
+    ticketsQtyMessageWarning: Veuillez choisir une quantité de billet positive
+    ticketsQtyMessageInfo1: Info stock :
+    ticketsQtyMessageInfo2: il reste suffisament de billets pour votre commande pour la date choisie.
+    resetTicketsMessageWarning1: Attention :
+    resetTicketsMessageWarning2: modifier la quantité de tickets réinitialise les données.
+    checkavailability: Vérification disponibilité...
+
+  orderTypeFormPage:
+    paymentBtn: Paiement
+
+  form:
+    label:
+      visitDate: Jour de la visite
+      quantity: Quantité
+      type: Type de billet
+      lastName: Nom
+      firstName: Prénom
+      country: Pays
+      birthday: Date de naissance
+      reducedPrice: Tarif-réduit
+    other:
+      fullday: Billet journée
+      halfday: Billet demi-journée
+      day: Jour
+      month: Mois
+      year: Année
 
   paymentPage:
+    payment: Paiement
+    errorMessage: La transaction n'a pas été validée
+    orderSummary: Récapitulatif de votre commande pour votre visite du musée du Louvre :
+    visitDate: Date de la visite :
+    ticket: Billet
+    reducedPrice: Tarif réduit
+    name: Nomination
+    quantity: Quantité
+    price: Tarif retenu
+    fullDay: Journée
+    halfDay: Demi-journée
+    yes: oui
+    no: non
+    beforeVAT: Total HT
+    afterVAT: Total TVA (10,00%)
+    totalOrder: Total de la commande TTC
+    changeInfo: Modifier mes informations
+    stripe:
+      name: Musée du Louvre
+      description: Paiement en ligne
+      label: Paiement par carte
+    noOrder: Pas de commande
+    back: Retour
 
   summaryPage:
-
-  fare:
+    summary: Récapitulatif
+    successMessage: La transaction a été validée
+    thankyou: Le musée du Louvre vous remercie pour votre commande et sera heureux de vous accueillir le
+    tickets: Vos e-billets ainsi que le récapitulatif de votre commande vous ont été envoyés à votre adresse email :
+    ticket: Votre e-billet ainsi que le récapitulatif de votre commande vous ont été envoyés à votre adresse email :
 
   email:
+    orderRef: Référence de la commande :
+    bye: Nous vous souhaitons une très bonne visite du musée !
+    team: L'équipe du musée du Louvre
+    credential: Justificatif pour votre visite du musée du Louvre
 
-  stripe:
 

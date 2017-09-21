@@ -174,7 +174,7 @@ function addTicket(index){
     var $container =$('#order_tickets');
 
         var $template = $container.attr('data-prototype')
-            .replace(/__name__label__/g, $ticket + ' n°' + index).replace(/class="control-label required">$ticket/g, 'class="control-label">'+$ticket).replace(/__name__/g,$ticket+'_' + index);
+            .replace(/class="control-label required">__name__label__/g, 'class="control-label">'+$ticket + ' n°' + index).replace(/class="control-label required">$ticket/g, 'class="control-label">'+$ticket).replace(/__name__/g,$ticket+'_' + index);
     var $prototype = $($template);
     addDeleteLink($prototype);
     $container.append($prototype);
@@ -302,14 +302,12 @@ function halfDayTicket(){
     //If same day and above 2 pm
     if($selectedDate.getFullYear()==$today.getFullYear() && $selectedDate.getMonth()==$today.getMonth() && $selectedDate.getDate()==$today.getDate() && $today.getHours()>=14 ){
         $('.halfOrFull_1').remove();
-        $('.fullOrHalfDay').removeClass('required');
+
         $('.fullOrHalfDay').attr('title',$halfdayAutoMessage);
         $('.halfOrFull_0').attr('title',$halfdayAutoMessage);
     }
     else{
-        //Add the required class if it was removed
-        if (!$('.fullOrHalfDay').hasClass('required')) {
-            $('.fullOrHalfDay').addClass('required');
+        //remove the title
             $('.fullOrHalfDay').removeAttr('title');
             $('.halfOrFull_0').removeAttr('title');
         }
@@ -318,7 +316,7 @@ function halfDayTicket(){
             var $fullDay = '<option value ="1" class ="halfOrFull_1">$fulldayTicket</option>'
             $('.halfOrFull_0').before($fullDay);
         }
-    }
+
 
 }
 

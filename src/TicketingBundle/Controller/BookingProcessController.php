@@ -47,10 +47,8 @@ class BookingProcessController extends Controller
             $qty = $order->getQuantity();
             $this->get('session')->set('qty', $qty);
 
-            var_dump($order);
 
-            return $this->redirectToRoute('ticketing_paiement'
-            );
+            return $this->redirectToRoute('ticketing_paiement');
         }
             return $this->render('TicketingBundle:BookingProcess:booking.html.twig', array(
                 'form' => $form->createView()
@@ -86,12 +84,13 @@ class BookingProcessController extends Controller
     }
 
 
-    public function paiementAction()
+    public function paiementAction(Request $request)
     {
 
         $order = $this->get('session')->get('order');
+        $locale = $request->attributes->get('_locale');
 
-        return $this->render('TicketingBundle:BookingProcess:paiement.html.twig', array('order' => $order));
+        return $this->render('TicketingBundle:BookingProcess:paiement.html.twig', array('order' => $order, 'locale' => $locale));
     }
 
     public function summaryAction()
@@ -132,10 +131,10 @@ class BookingProcessController extends Controller
             /*$em->persist($order);
             $em->flush();*/
 
-            $this->addFlash("success", "La transaction a été validée");
+            $this->addFlash("success", "ticketing.summayPage.successMessage");
             return $this->redirectToRoute('ticketing_summary');
         } catch (\Stripe\Error\Card $e){
-            $this->addFlash("error", "La transaction n'a pas été validée");
+            $this->addFlash("error", "ticketing.paymentPage.errorMessage");
             return $this->redirectToRoute("ticketing_paiement");
             // The card has been declined
         }

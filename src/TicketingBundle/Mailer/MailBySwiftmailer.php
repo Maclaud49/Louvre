@@ -22,12 +22,13 @@ class MailBySwiftmailer{
         
 
         $message = \Swift_Message::newInstance()
-            ->setSubject('Justificatif pour votre visite du musée du Louvre')
+            ->setSubject('ticketing.email.credential')
             ->setFrom($from)
             ->setTo($recipient)
             ->setBody($body,'text/html'
             )
-            ->addPart($part,'text/plain');
+            ->addPart($part,'text/plain')
+            ->attach(\Swift_Attachment::fromPath('C:\xampp2\htdocs\www\Symfony\web\css\louvre.css'));
         $this->mailer->send($message);
     }
 

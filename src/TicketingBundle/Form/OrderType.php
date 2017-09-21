@@ -21,7 +21,7 @@ class OrderType extends AbstractType
 
             ->add('bookingDate', DateType::class,
                 array(
-                    'label' =>'Date de la visite',
+                    'label' =>'ticketing.form.label.visitDate',
                     'label_attr' =>array('id' =>'bookingDateLabel'),
                     'widget' => 'single_text',
                     'html5' =>false,
@@ -32,7 +32,7 @@ class OrderType extends AbstractType
 
             ->add('quantity', IntegerType::class,
                 array(
-                'label' =>'Quantité désirée',
+                'label' =>'ticketing.form.label.quantity',
                 'required' => false,
                 'label_attr' =>array('id' =>'qtyLabel'),
                 'attr' => array('class' => 'text-center'),
@@ -47,6 +47,7 @@ class OrderType extends AbstractType
                     'allow_delete' =>true,
                     'error_bubbling' => false,
                     'label'=> false,
+                    'required' =>true
 
 
                 ))

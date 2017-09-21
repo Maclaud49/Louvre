@@ -1,17 +1,21 @@
-{% trans %}Récapitulatif de votre commande pour votre visite du musée du Louvre :{% endtrans %}
+{% trans %}ticketing.paymentPage.orderSummary{% endtrans %}
 
-{% trans %}Date de la visite :{% endtrans %} {{ order.bookingDate|date("d/m/y") }}
+{% trans %}ticketing.paymentPage.visitDate{% endtrans %} {{ order.bookingDate|date("d/m/y") }}
 
 {% for ticket in order.tickets %}
 
-    {% trans %}Billet{% endtrans %} : {% if  ticket.type == 1  %}{% trans %}Journée{% endtrans %}{% else %}{% trans %}Demi-journée{% endtrans %}{% endif %}
-    {% trans %}Tarif réduit{% endtrans %} : {% if  ticket.reducedPrice == 1  %}{% trans %}Oui{% endtrans %}{% else %}{% trans %}Non{% endtrans %}{% endif %}
-    {% trans %}Nomination{% endtrans %} : {{ ticket.firstName }} {{ ticket.lastName }}
-    {% trans %}Quantité{% endtrans %} : 1
-    {% trans %}Tarif retenu{% endtrans %} : {{ ticket.Price|number_format(2, ',', '') }}€
+    {% trans %}ticketing.paymentPage.ticket{% endtrans %} : {% if  ticket.type == 1  %}{% trans %}ticketing.paymentPage.fullDay{% endtrans %}{% else %}{% trans %}ticketing.paymentPage.halfDay{% endtrans %}{% endif %}
+    {% trans %}ticketing.paymentPage.reducedPrice{% endtrans %} : {% if  ticket.reducedPrice == 1  %}{% trans %}ticketing.paymentPage.yes{% endtrans %}{% else %}{% trans %}ticketing.paymentPage.no{% endtrans %}{% endif %}
+    {% trans %}ticketing.paymentPage.name{% endtrans %} : {{ ticket.firstName }} {{ ticket.lastName }}
+    {% trans %}ticketing.paymentPage.quantity{% endtrans %} : 1
+    {% trans %}ticketing.paymentPage.price{% endtrans %} : {{ ticket.Price|number_format(2, ',', '') }}€
 
 {% endfor %}
 
-{% trans %}Total HT{% endtrans %} : {{ (order.orderAmount / 1.1)|number_format(2, ',', '') }}€
-{% trans %}Total TVA (10,00%){% endtrans %} : {{ (order.orderAmount - order.orderAmount / 1.1)|number_format(2, ',', '')}}€
-{% trans %}Total de la commande{% endtrans %} : {{ order.orderAmount|number_format(2, ',', '') }}€
+{% trans %}ticketing.paymentPage.beforeVAT{% endtrans %} : {{ (order.orderAmount / 1.1)|number_format(2, ',', '') }}€
+{% trans %}ticketing.paymentPage.afterVAT{% endtrans %} : {{ (order.orderAmount - order.orderAmount / 1.1)|number_format(2, ',', '')}}€
+{% trans %}ticketing.paymentPage.totalOrder{% endtrans %} : {{ order.orderAmount|number_format(2, ',', '') }}€
+
+{% trans %}ticketing.email.bye{% endtrans %}
+
+{% trans %}ticketing.email.team{% endtrans %}

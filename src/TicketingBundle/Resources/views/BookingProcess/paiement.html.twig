@@ -1,32 +1,27 @@
 {% extends "TicketingBundle::layout.html.twig" %}
 
 {% block title %}
-    {{ parent() }} - {% trans %}Paiement{% endtrans %}
+    {{ parent() }} - {% trans %}ticketing.paymentPage.payment{% endtrans %}
 {% endblock %}
 
 {% block content %}
 
 
-
-    {% for message in app.session.flashbag.get('info') %}
-        <div class="alert alert-info">Message flash : {{ message|trans }}</div>
-    {% endfor %}
-
-
     {% for message in app.session.flashbag.get('error') %}
-        <div class="alert alert-error">Message flash : {{ message|trans }}</div>
+        <div class="alert alert-error">{{ message|trans }}</div>
     {% endfor %}
 
+    {{ locale }}
 
     {% if order %}
             <div id="container">
                 <div id="welcome">
-                    <h2>{% trans %}Récapitulatif de votre commande pour votre visite du musée du Louvre :{% endtrans %}</h2>
+                    <h2>{% trans %}ticketing.paymentPage.orderSummary{% endtrans %}</h2>
                 </div>
 
 
                 <div style="margin-top: 30px">
-                    <p><strong>{% trans %}Date de la visite :{% endtrans %}</strong> {{ order.bookingDate|date("d/m/y") }}</p>
+                    <p><strong>{% trans %}ticketing.paymentPage.visitDate{% endtrans %}</strong> {{ order.bookingDate|date("d/m/y") }}</p>
                 </div>
 
 
@@ -37,25 +32,25 @@
                             <table class="table table-hover table-condensed">
                                 <thead>
                                 <tr>
-                                    <th class="text-center">{% trans %}Billet{% endtrans %}</th>
-                                    <th class="text-center">{% trans %}Tarif réduit{% endtrans %}</th>
-                                    <th class="text-center">{% trans %}Nomination{% endtrans %}</th>
-                                    <th class="text-center">{% trans %}Quantité{% endtrans %}</th>
-                                    <th class="text-center">{% trans %}Tarif retenu{% endtrans %}</th>
+                                    <th class="text-center">{% trans %}ticketing.paymentPage.ticket{% endtrans %}</th>
+                                    <th class="text-center">{% trans %}ticketing.paymentPage.reducedPrice{% endtrans %}</th>
+                                    <th class="text-center">{% trans %}ticketing.paymentPage.name{% endtrans %}</th>
+                                    <th class="text-center">{% trans %}ticketing.paymentPage.quantity{% endtrans %}</th>
+                                    <th class="text-center">{% trans %}ticketing.paymentPage.price{% endtrans %}</th>
                                 </tr>
                                 </thead>
                                 {% for ticket in order.tickets %}
                                     <tr>
                                         <td>{% if  ticket.type == 1  %}
-                                                <p>{% trans %}Journée{% endtrans %}</p>
+                                                <p>{% trans %}ticketing.paymentPage.fullDay{% endtrans %}</p>
                                             {% else %}
-                                                <p>{% trans %}Demi-journée{% endtrans %}</p>
+                                                <p>{% trans %}ticketing.paymentPage.halfDay{% endtrans %}</p>
                                             {% endif %}
                                         </td>
                                         <td>{% if  ticket.reducedPrice == 1  %}
-                                                <p>{% trans %}Oui{% endtrans %}</p>
+                                                <p>{% trans %}ticketing.paymentPage.yes{% endtrans %}</p>
                                             {% else %}
-                                                <p>{% trans %}Non{% endtrans %}</p>
+                                                <p>{% trans %}ticketing.paymentPage.no{% endtrans %}</p>
                                             {% endif %}
                                         </td>
                                         <td class="text-center">{{ ticket.firstName }} {{ ticket.lastName }}</td>
@@ -70,15 +65,15 @@
                                 <table class="table table-hover table-condensed">
 
                                     <tr>
-                                        <th class="text-center" style="font-weight: normal;">{% trans %}Total HT{% endtrans %}</th>
+                                        <th class="text-center" style="font-weight: normal;">{% trans %}ticketing.paymentPage.beforeVAT{% endtrans %}</th>
                                         <td class="text-center">{{ (order.orderAmount / 1.1)|number_format(2, ',', '') }}€</td>
                                     </tr>
                                     <tr>
-                                        <th class="text-center" style="font-weight: normal;">{% trans %}Total TVA (10,00%){% endtrans %}</th>
+                                        <th class="text-center" style="font-weight: normal;">{% trans %}ticketing.paymentPage.afterVAT{% endtrans %}</th>
                                         <td class="text-center">{{ (order.orderAmount - order.orderAmount / 1.1)|number_format(2, ',', '')}}€</td>
                                     </tr>
                                     <tr>
-                                        <th class="text-center">{% trans %}Total de la commande TTC{% endtrans %}</th>
+                                        <th class="text-center">{% trans %}ticketing.paymentPage.totalOrder{% endtrans %}</th>
                                         <td class="text-center"><strong>{{ order.orderAmount|number_format(2, ',', '') }}€</strong></td>
                                     </tr>
                                 </table>
@@ -94,7 +89,7 @@
                     <div class="text-center">
                         <div class="col-sm-6 page-item">
                             <button type="button" class="btn btn-secondary">
-                                <a href="{{ path('ticketing_booking') }}" style="text-decoration: none">{% trans %}Modifier mes informations{% endtrans %}</a>
+                                <a href="{{ path('ticketing_booking') }}" style="text-decoration: none">{% trans %}ticketing.paymentPage.changeInfo{% endtrans %}</a>
                             </button>
                         </div>
                         <div class="col-sm-6">
@@ -103,13 +98,13 @@
                                         src="https://checkout.stripe.com/checkout.js" class="stripe-button"
                                         data-key="pk_test_QGAVTYmmjlNMeq41SwQH6bz9"
                                         data-amount="{{ order.orderAmount*100 }}"
-                                        data-name="{% trans %}Musée du Louvre{% endtrans %}"
-                                        data-description="{% trans %}Paiement en ligne{% endtrans %}"
+                                        data-name="{% trans %}ticketing.paymentPage.stripe.name{% endtrans %}"
+                                        data-description="{% trans %}ticketing.paymentPage.stripe.description{% endtrans %}"
                                         data-image="{{ asset('images/louvre-icon.jpg') }}"
-                                        data-locale="auto"
+                                        data-locale="{{ locale }}"
                                         data-zip-code="false"
                                         data-currency="eur"
-                                        data-label="{% trans %}Paiement par carte{% endtrans %}"
+                                        data-label="{% trans %}ticketing.paymentPage.stripe.label{% endtrans %}"
                                         data-allow-remember-me="false">
                                 </script>
                             </form>
@@ -119,12 +114,12 @@
             </div>
 
     {% else %}
-        <div class="alert alert-warning">{% trans %}Pas de commande{% endtrans %}</div>
+        <div class="alert alert-warning">{% trans %}ticketing.paymentPage.noOrder{% endtrans %}</div>
         <div class="row" id="paiement-navigation">
             <div class="text-center">
                 <div class="col-sm-6 page-item">
                     <button type="button" class="btn btn-secondary">
-                        <a href="{{ path('ticketing_booking') }}" style="text-decoration: none">{% trans %}Retour{% endtrans %}</a>
+                        <a href="{{ path('ticketing_booking') }}" style="text-decoration: none">{% trans %}ticketing.paymentPage.back{% endtrans %}</a>
                     </button>
                 </div>
             </div>

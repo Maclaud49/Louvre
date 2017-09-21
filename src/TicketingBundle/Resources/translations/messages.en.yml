@@ -1,67 +1,89 @@
-Bienvenue sur la billeterie du musée du Louvre: Welcome to the Louvre Museum ticketing
-Réservation: Booking
-Information: Information
-'Le musée du Louvre est ouvert tous les jours sauf :': Louvre Museum is open everyday but :
-les mardis, dimanches et jours fériés.: Tuesdays, Sundays and holidays.
-Tarifications: Ticket pricing
-'Tarif normal :': Full fare :
-(à partir de 12 ans): (from 12 years old)
-'Tarif enfant :': Child fare :
-(pour les 4 à 12 ans): (between 4 and 12 years old)
-'Tarif sénior :': Senior fare :
-(à partir de 60 ans): (from 60 years old)
-'Tarif réduit :': Half-fare :
-(étudiants, employés du musée, militaires): (students, museum employees, serviceman)
-'Billet demi-journée :': Half-day ticket :
-Gratuit pour les moins de 4 ans: Free for ages 4 and under
-'Info stock :': Stock information :
-il reste suffisament de billets pour votre commande pour la date choisie.: There are enough tickets for your order.
-'Attention :': Be aware :
-modifier la quantité de tickets réinitialise les données.: changing the quantity will reboot data
-Vérification disponibilité...: Checking availability...
-Paiement: Payment
-'Récapitulatif de votre commande pour votre visite du musée du Louvre :': Order summary for your Louvre Museum visit  :
-'Date de la visite :': Visit date :
-Billet: Ticket
-Tarif réduit: Half-fare
-Nomination: Name
-Quantité: Quantity
-Tarif retenu: Price
-Journée: All-day
-Demi-journée: Half-day
-Oui: Yes
-Non: No
-Total HT: Total before VAT
-Total TVA (10,00%): Total VAT (10,00%)
-Total de la commande TTC: Total including VAT
-Modifier mes informations: Modify information
-Musée du Louvre: Louvre Museum
-Paiement en ligne: Online payment
-Pas de commande: No order
-Retour: Back
-Récapitulatif: Summary
-Le musée du Louvre vous remercie pour votre commande et sera heureux de vous accueillir le: Louvre Museum will be happy to welcome you the
-'Vos e-billets ainsi que le récapitulatif de votre commande vous ont été envoyés à votre adresse email :': Your tickets and order summary have been sent to your email address :
-'Votre e-billet ainsi que le récapitulatif de votre commande vous ont été envoyés à votre adresse email :': Your ticket and order summary have been sent to your email address :
-'Référence de la commande :': Order reference :
-Total de la commande: Total order
-Nous vous souhaitons une très bonne visite du musée !: We wish you a pleasant time visiting Louvre Museum!
-L''équipe du musée du Louvre: Louvre Museum's team
-Billeterie: Ticketing
-Date de la visite: Visit date
-Quantité désirée: Quantity
-Type de billet: Ticket type
-Billet journée: Full-day ticket
-Billet demi-journée: Half-day ticket
-Nom: Lastname
-Prénom: Firstname
-Pays: Country
-Date de naissance: Birthday
-Année: Year
-Mois: Month
-Jour: Day
-Paiement: Payment
-Veuillez choisir une quantité de billet positive: Quantity should be positive
-Paiement par carte: Pay with card
-La transaction a été validée: The transaction was validated
-Justificatif pour votre visite du musée du Louvre: Ticket(s) for your Louvre Museum visit
+ticketing:
+  order:
+
+  ticket:
+
+  layout:
+    ticketing: Ticketing
+    welcome: Welcome to the Louvre Museum ticketing
+
+  bookingPage:
+    booking: Booking
+    information: Information
+    closedDaysSentence: Louvre Museum is open everyday but :
+    closedDays: Tuesdays, Sundays and holidays.
+    ticketPricing: Ticket pricing
+    fullFare: Full fare :
+    childFare: Child fare :
+    seniorFare: Senior fare :
+    reducedFare: reduced fare :
+    halfDayFare: Half-day ticket :
+    free: Free for ages 4 and under
+    from12: (from 12 years old)
+    from4: (between 4 and 12 years old)
+    from60: (from 60 years old)
+    credential: (students, museum employees, serviceman)
+    ticketsQtyMessageWarning: Quantity should be positive
+    ticketsQtyMessageInfo1: Stock information :
+    ticketsQtyMessageInfo2: There are enough tickets for your order.
+    resetTicketsMessageWarning1: Attention :
+    resetTicketsMessageWarning2: changing the quantity will reboot data
+    checkavailability: Checking availability...
+
+  orderTypeFormPage:
+    paymentBtn: Payment
+
+  form:
+    label:
+      visitDate: Visit date
+      quantity: Quantity
+      type: Type of ticket
+      lastName: Lastname
+      firstName: FirstName
+      country: Country
+      birthday: Birthday date
+      reducedPrice: Reduced price
+    other:
+      fullday: Full-day Ticket
+      halfday: Half-Day Ticket
+      day: Day
+      month: Month
+      year: Year
+
+  paymentPage:
+    payment: Payment
+    errorMessage: The transaction was not validated
+    orderSummary: Order summary for your Louvre Museum visit :
+    visitDate: Visit date :
+    ticket: Ticket
+    reducedPrice: Reduced fare
+    name: Name
+    quantity: Quantity
+    price: Price
+    fullDay: Full-day
+    halfDay: Half-day
+    yes: yes
+    no: no
+    beforeVAT: Total before VAT
+    afterVAT: Total VAT (10,00%)
+    totalOrder: Total including VAT
+    changeInfo: Modify information
+    stripe:
+      name: Louvre Museum
+      description: Online payment
+      label: Payment by card
+    noOrder: No order
+    back: Back
+
+  summaryPage:
+    summary: Summary
+    successMessage: The transaction was validated
+    thankyou: Louvre Museum will be happy to welcome you the
+    tickets: Your tickets and order summary have been sent to your email address :
+    ticket: Your ticket and order summary have been sent to your email address :
+
+  email:
+    orderRef: Order reference :
+    bye: We wish you a pleasant time visiting Louvre Museum!
+    team: Louvre Museum's team
+    credential: Ticket(s) for your Louvre Museum visit

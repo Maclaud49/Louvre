@@ -1,7 +1,7 @@
 {% extends "TicketingBundle::layout.html.twig" %}
 
 {% block title %}
-    {{ parent() }} - {% trans %}Récapitulatif{% endtrans %}
+    {{ parent() }} - {% trans %}ticketing.summayPage.summary{% endtrans %}
 {% endblock %}
 
 {% block content %}
@@ -9,18 +9,18 @@
 
 
     {% for message in app.session.flashbag.get('success') %}
-        <div class="alert alert-success">Message flash : {{ message|trans }}</div>
+        <div class="alert alert-success">{{ message|trans }}</div>
     {% endfor %}
 
     {% if order %}
-    <div>{% trans %}Le musée du Louvre vous remercie pour votre commande et sera heureux de vous accueillir le{% endtrans %} {{ order.bookingDate|date("d/m/y") }}.</div><br>
+    <div>{% trans %}ticketing.summayPage.thankyou{% endtrans %} {{ order.bookingDate|date("d/m/y") }}.</div><br>
     {% endif %}
 
     {% if email %}
     {% if qty > 1 %}
-        <div>{% trans %}Vos e-billets ainsi que le récapitulatif de votre commande vous ont été envoyés à votre adresse email :{% endtrans %} {{ email }}.</div>
+        <div>{% trans %}ticketing.summayPage.tickets{% endtrans %} {{ email }}.</div>
     {% else %}
-        <div>{% trans %}Votre e-billet ainsi que le récapitulatif de votre commande vous ont été envoyés à votre adresse email :{% endtrans %} {{ email }}.</div>
+        <div>{% trans %}ticketing.summayPage.ticket{% endtrans %} {{ email }}.</div>
     {% endif %}
     {% endif %}
 
