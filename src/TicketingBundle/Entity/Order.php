@@ -144,6 +144,7 @@ class Order
      * @var \DateTime
      *
      * @ORM\Column(name="bookingDate", type="date")
+     * @Assert\NotBlank(message = "entity.not_blank")
      */
     private $bookingDate;
 
@@ -203,6 +204,10 @@ class Order
         $this->bookingCode = $this->GenerateCode();
         $this->tickets = new ArrayCollection();
         $this->orderDateTime = new \DateTime();
+        $this->bookingDate = new \DateTime();
+        $this->quantity = 1;
+        $this->addTicket($this->createATicket());
+
     }
 
     private function GenerateCode()
@@ -229,6 +234,24 @@ class Order
             }
             $this->$method($value);
         }
+    }
+
+    public function createATicket(){
+        $birthdayDate = new \DateTime('01-01-1981');
+
+        $formDataTicket = array(
+            'type'=>'1',
+            'firstName'=>'',
+            'lastName'=>'',
+            'country'=>'',
+            'birthdayDate'=>$birthdayDate,
+            'reducedPrice'=> false
+        );
+
+        $ticket = new Ticket();
+        $ticket->fromArray($formDataTicket);
+
+        return $ticket;
     }
 
 }

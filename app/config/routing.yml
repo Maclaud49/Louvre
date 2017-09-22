@@ -1,6 +1,6 @@
 ticketing:
     resource: "@TicketingBundle/Resources/config/routing.yml"
-    prefix:   /{_locale}/billeterie
+    prefix:   /{_locale}/ticketing
     requirements:
       _locale: en|fr
 

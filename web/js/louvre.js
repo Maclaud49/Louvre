@@ -75,14 +75,12 @@ $(function(){
 
     //Select language for datepicker and sentences
     $address = window.location.href;
-    $locale= "en/billeterie/";
+    $locale= "en/ticketing/";
     $orderQtyWarningtitle='';
     if( $address.includes($locale)){
         $.datepicker.setDefaults($.datepicker.regional['en']);
-        $orderQtyWarningtitle='Be aware : changing the quantity will reboot data';
         $halfdayAutoMessage = 'From 2 p.m. only half day tickets are available';
         $fulldayTicket = 'Full-day ticket';
-        $firstDate ='First choose a date please';
         $deleteTicket ="Delete this ticket";
         $ticket = "Ticket";
         $proofneeded = "A credential will be asked at the entrance of the museum";
@@ -92,10 +90,8 @@ $(function(){
     }
     else {
         $.datepicker.setDefaults($.datepicker.regional['fr']);
-        $orderQtyWarningtitle='Attention : modifier la quantité réinitialise les données';
         $halfdayAutoMessage = 'Demi-tarif automatique à partir de 14h00';
         $fulldayTicket = 'Billet journée';
-        $firstDate = 'Renseignez en premier lieu la date souhaitée de votre visite';
         $deleteTicket = "Supprimer ce billet";
         $ticket = "Billet";
         $proofneeded = "Un justificatif vous sera demandé à l'entrée du musée";
@@ -103,9 +99,6 @@ $(function(){
 
 
     }
-
-
-
 
 
     //datepicker for booking date on read only mode
@@ -116,9 +109,6 @@ $(function(){
     $( ".bookingDatepicker").change(function(){
         var $qty =$('#order_quantity').val();
         $('#ticketsQtyMessageWarning').hide(0);
-        $('#PricesInformationMessage').show(0);
-        qtyBtn();
-
         if($qty<=0){
             $('#ticketsQtyMessageWarning').show(0);
         }
@@ -130,14 +120,11 @@ $(function(){
 
     /******************************************booking page load*****************************************************/
 
-    qtyBtn();
-    validateBtn();
-    var $qty =$('#order_quantity').val();
-    if($qty>0){
+        $('#order_quantity').hide();
+        $('#qtyLabel').hide();
         $('#PricesInformationMessage').show(0);
-        $('#resetTicketsMessageWarning').show(0);
-    }
-
+        halfDayTicket();
+        checkQtyOfDay();
 
 
     /****************************************************************************************************************/
@@ -147,24 +134,29 @@ $(function(){
     $('#order_quantity').change(function(){
         var $date = $( ".bookingDatepicker").val();
         var $qty =$('#order_quantity').val();
-        $('#resetTicketsMessageWarning').hide(0);
-        if ($qty>0 && $date !=""){
+
+        if ($qty>0){
             $('#ticketsQtyMessageWarning').hide(0);
             $('#openDaysInformationMessage').hide(0);
             $('#PricesInformationMessage').show(0);
-            resetTickets();
-            validateBtn();
             displayTickets();
             halfDayTicket();
             checkQtyOfDay();
             $('.checkbox>label').attr('title',$proofneeded);
         }
-        else if ($qty<=0 && $date !=""){
+        else if ($qty<=0){
             $('#ticketsQtyMessageInfo').hide(0);
             $('#ticketsQtyMessageWarning').show(0);
-            resetTickets();
-            validateBtn();
         }
+    })
+
+    $('#addTicket-btn').click(function(){
+        var $qty =$('#order_quantity').val();
+        var $index = parseInt($qty) + 1;
+        addTicket($index);
+        $('#order_quantity').val(parseInt($qty)+1);
+        checkQtyOfDay();
+        halfDayTicket();
     })
 });
 
@@ -173,21 +165,11 @@ function addTicket(index){
 
     var $container =$('#order_tickets');
 
-        var $template = $container.attr('data-prototype')
+    var $template = $container.attr('data-prototype')
             .replace(/class="control-label required">__name__label__/g, 'class="control-label">'+$ticket + ' n°' + index).replace(/class="control-label required">$ticket/g, 'class="control-label">'+$ticket).replace(/__name__/g,$ticket+'_' + index);
     var $prototype = $($template);
     addDeleteLink($prototype);
     $container.append($prototype);
-}
-
-//Remove all tickets from the page
-function resetTickets(){
-    $index = 0;
-    var $container = document.getElementById("order_tickets");
-    var $tickets = $container.childNodes;
-    var ticketsJQ=$($tickets);
-    ticketsJQ.remove();
-
 }
 
 //Add a delete button on ticket
@@ -198,15 +180,16 @@ function addDeleteLink($prototype) {
     $deleteLink.click(function (e) {
         var $qty =$('#order_quantity').val();
         $('#order_quantity').val($qty-1);
-        if($qty == 1){
-            $('#ticketsQtyMessageInfo').hide(0);
-            $('#ticketsQtyMessageWarning').hide(0);
-        }
-        validateBtn();
-
         $prototype.remove();
         e.preventDefault();
-        return false;
+        $qty =$('#order_quantity').val();
+        if($qty == 0){
+            $('#order_quantity').val(1);
+            displayTickets();
+            halfDayTicket();
+            checkQtyOfDay();
+        }
+
     });
 }
 
@@ -217,7 +200,7 @@ function checkQtyOfDay(){
     var DATA = 'date=' + $date;
     $.ajax({
         type:"POST",
-        url:"billets-vendus",
+        url:"sold-tickets",
         data:DATA,
         cache:false,
         dataType:'json',
@@ -248,35 +231,6 @@ $(document)
         $loading.hide();
     });
 
-//Disabled paiement button if no quantity choosen
-function validateBtn(){
-
-    var $qty = $('#order_quantity').val();
-    if ($qty >0) {
-        $('#validate-btn').show();
-    }
-    else {
-        $('#validate-btn').hide();
-    }
-}
-
-//Disabled order quantity button if no date choosen
-function qtyBtn(){
-
-    var $date = $( ".bookingDatepicker").val();
-    if($date=="") {
-        $('#order_quantity').attr({
-            'disabled': 'disabled',
-            'title': $firstDate
-        });
-    }
-    else{
-        $('#order_quantity').attr({
-            'title': $orderQtyWarningtitle
-        });
-        $('#order_quantity').removeAttr('disabled');
-    }
-}
 
 //Display tickets depending of the selected qty
 function displayTickets(){
@@ -292,6 +246,7 @@ function displayTickets(){
 function halfDayTicket(){
     var $today = new Date();
     var $selectedDate = $('.bookingDatepicker').val();
+
     //Convert to JS date
     $selectedYear = $selectedDate.charAt(6)+$selectedDate.charAt(7)+$selectedDate.charAt(8)+$selectedDate.charAt(9);
     $selectedMonth = $selectedDate.charAt(3)+$selectedDate.charAt(4);
@@ -302,22 +257,21 @@ function halfDayTicket(){
     //If same day and above 2 pm
     if($selectedDate.getFullYear()==$today.getFullYear() && $selectedDate.getMonth()==$today.getMonth() && $selectedDate.getDate()==$today.getDate() && $today.getHours()>=14 ){
         $('.halfOrFull_1').remove();
-
         $('.fullOrHalfDay').attr('title',$halfdayAutoMessage);
         $('.halfOrFull_0').attr('title',$halfdayAutoMessage);
     }
-    else{
+    else {
         //remove the title
-            $('.fullOrHalfDay').removeAttr('title');
-            $('.halfOrFull_0').removeAttr('title');
-        }
+        $('.fullOrHalfDay').removeAttr('title');
+        $('.halfOrFull_0').removeAttr('title');
+
         //Add the full day option
-        if(document.getElementsByClassName('halfOrFull_1').length == 0) {
-            var $fullDay = '<option value ="1" class ="halfOrFull_1">$fulldayTicket</option>'
+        if (document.getElementsByClassName('halfOrFull_1').length == 0) {
+            var $fullDay = '<option value ="1" class ="halfOrFull_1">' + $fulldayTicket + '</option>'
             $('.halfOrFull_0').before($fullDay);
+            $('.halfOrFull_1').attr('selected','selected');
         }
-
-
+    }
 }
 
 

@@ -7,14 +7,16 @@ class MailBySwiftmailer{
 
     private $mailer;
     private $twig;
+    private $from;
 
-    public function  __construct(\Swift_Mailer $mailer,\Twig_Environment $twig){
+    public function  __construct(\Swift_Mailer $mailer,\Twig_Environment $twig,String $from){
 
         $this->mailer = $mailer;
         $this->twig = $twig;
+        $this->from =$from;
     }
 
-    public function mailTickets(Order $order, String $recipient, String $from)
+    public function mailTickets(Order $order, String $recipient)
     {
 
         $body = $this->renderTemplateHTML($order);
@@ -23,12 +25,11 @@ class MailBySwiftmailer{
 
         $message = \Swift_Message::newInstance()
             ->setSubject('ticketing.email.credential')
-            ->setFrom($from)
+            ->setFrom($this->from)
             ->setTo($recipient)
             ->setBody($body,'text/html'
             )
-            ->addPart($part,'text/plain')
-            ->attach(\Swift_Attachment::fromPath('C:\xampp2\htdocs\www\Symfony\web\css\louvre.css'));
+            ->addPart($part,'text/plain');
         $this->mailer->send($message);
     }
 

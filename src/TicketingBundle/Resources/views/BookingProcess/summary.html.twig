@@ -13,14 +13,14 @@
     {% endfor %}
 
     {% if order %}
-    <div>{% trans %}ticketing.summayPage.thankyou{% endtrans %} {{ order.bookingDate|date("d/m/y") }}.</div><br>
+    <div>{% trans %}ticketing.summaryPage.thankyou{% endtrans %} {{ order.bookingDate|date("d/m/y") }}.</div><br>
     {% endif %}
 
     {% if email %}
     {% if qty > 1 %}
-        <div>{% trans %}ticketing.summayPage.tickets{% endtrans %} {{ email }}.</div>
+        <div>{% trans %}ticketing.summaryPage.tickets{% endtrans %} {{ email }}.</div>
     {% else %}
-        <div>{% trans %}ticketing.summayPage.ticket{% endtrans %} {{ email }}.</div>
+        <div>{% trans %}ticketing.summaryPage.ticket{% endtrans %} {{ email }}.</div>
     {% endif %}
     {% endif %}
 

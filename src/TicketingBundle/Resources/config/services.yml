@@ -1,7 +1,7 @@
 services:
 
-  ticketing.paiement.stripe:
-    class: TicketingBundle\Stripe\PaiementStripe
+  ticketing.payment.stripe:
+    class: TicketingBundle\Stripe\PaymentStripe
     arguments:
       - "%stripeAPIKey%"
 
@@ -10,3 +10,4 @@ services:
       arguments:
        - "@mailer"
        - "@twig"
+       - "%mailer_user%"

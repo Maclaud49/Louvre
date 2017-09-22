@@ -34,21 +34,17 @@ class BookingProcessController extends Controller
            foreach ($order->getTickets() as $ticket){
                $ticket->setTicketPrice();
            }
-
            //Set order price
             $orderAmount=0;
             foreach ($order->getTickets() as $ticket){
                 $orderAmount += $ticket->getPrice();
             }
             $order->setOrderAmount($orderAmount);
-
             $this->get('session')->set('order',$order);
-
             $qty = $order->getQuantity();
             $this->get('session')->set('qty', $qty);
 
-
-            return $this->redirectToRoute('ticketing_paiement');
+            return $this->redirectToRoute('ticketing_payment');
         }
             return $this->render('TicketingBundle:BookingProcess:booking.html.twig', array(
                 'form' => $form->createView()
@@ -84,13 +80,13 @@ class BookingProcessController extends Controller
     }
 
 
-    public function paiementAction(Request $request)
+    public function paymentAction(Request $request)
     {
 
         $order = $this->get('session')->get('order');
         $locale = $request->attributes->get('_locale');
 
-        return $this->render('TicketingBundle:BookingProcess:paiement.html.twig', array('order' => $order, 'locale' => $locale));
+        return $this->render('TicketingBundle:BookingProcess:payment.html.twig', array('order' => $order, 'locale' => $locale));
     }
 
     public function summaryAction()
@@ -111,31 +107,29 @@ class BookingProcessController extends Controller
     public function checkoutAction(Request $request)
     {
         $order = $this->get('session')->get('order');
-        $stripe = $this->get('ticketing.paiement.stripe');
+        $stripe = $this->get('ticketing.payment.stripe');
         $recipientEmail = $request->get('stripeEmail');
         $this->get('session')->set('email', $recipientEmail);
         $token = $request->get('stripeToken');
         $em = $this->getDoctrine()->getManager();
         $mailer = $this->get('ticketing.mail.swiftmailer');
-        $from = $this->getParameter('mailer_user');
-
 
         try {
             //Charge the customer
-            $stripe->paiementByStripe($order, $token);
+            $stripe->paymentByStripe($order, $token);
 
             //Send mail to the customer
-            $mailer->mailTickets($order,$recipientEmail, $from);
+            $mailer->mailTickets($order,$recipientEmail);
 
             //Save order on the bdd
             /*$em->persist($order);
             $em->flush();*/
 
-            $this->addFlash("success", "ticketing.summayPage.successMessage");
+            $this->addFlash("success", "ticketing.summaryPage.successMessage");
             return $this->redirectToRoute('ticketing_summary');
         } catch (\Stripe\Error\Card $e){
             $this->addFlash("error", "ticketing.paymentPage.errorMessage");
-            return $this->redirectToRoute("ticketing_paiement");
+            return $this->redirectToRoute("ticketing_payment");
             // The card has been declined
         }
     }

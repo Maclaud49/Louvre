@@ -16,7 +16,7 @@ ticketing:
     fullFare: Full fare :
     childFare: Child fare :
     seniorFare: Senior fare :
-    reducedFare: reduced fare :
+    reducedFare: Reduced fare :
     halfDayFare: Half-day ticket :
     free: Free for ages 4 and under
     from12: (from 12 years old)
@@ -25,13 +25,12 @@ ticketing:
     credential: (students, museum employees, serviceman)
     ticketsQtyMessageWarning: Quantity should be positive
     ticketsQtyMessageInfo1: Stock information :
-    ticketsQtyMessageInfo2: There are enough tickets for your order.
-    resetTicketsMessageWarning1: Attention :
-    resetTicketsMessageWarning2: changing the quantity will reboot data
+    ticketsQtyMessageInfo2: There are enough tickets for your order on the choosen date.
     checkavailability: Checking availability...
 
   orderTypeFormPage:
     paymentBtn: Payment
+    addTicketBtn : Add a ticket
 
   form:
     label:
@@ -87,3 +86,5 @@ ticketing:
     bye: We wish you a pleasant time visiting Louvre Museum!
     team: Louvre Museum's team
     credential: Ticket(s) for your Louvre Museum visit
+
+Veuillez renseigner ce champ.: test

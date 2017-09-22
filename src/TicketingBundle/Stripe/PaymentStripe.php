@@ -5,7 +5,7 @@ namespace TicketingBundle\Stripe;
 use TicketingBundle\Entity\Order;
 
 
-class PaiementStripe{
+class PaymentStripe{
 
     private $APIKey;
 
@@ -19,7 +19,7 @@ class PaiementStripe{
      * @param String $token
      * Create a charge to the user's card
      */
-    public function paiementByStripe(Order $order, String $token)
+    public function paymentByStripe(Order $order, String $token)
     {
         \Stripe\Stripe::setApiKey($this->APIKey);
 

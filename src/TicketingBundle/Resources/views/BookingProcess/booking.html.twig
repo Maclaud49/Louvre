@@ -11,6 +11,19 @@
         <p>{% trans %}ticketing.bookingPage.closedDaysSentence{% endtrans %} <br>{% trans %}ticketing.bookingPage.closedDays{% endtrans %}</p>
     </div>
 
+
+
+    <div id="ticketsQtyMessageWarning" class="alert alert-warning text-center" style="display:none">{% trans %}ticketing.bookingPage.ticketsQtyMessageWarning{% endtrans %}</div>
+    <div id="ticketsQtyMessageInfo" class="alert alert-info text-center" style="display:none"><p><strong>{% trans %}ticketing.bookingPage.ticketsQtyMessageInfo1{% endtrans %} </strong> {% trans %}ticketing.bookingPage.ticketsQtyMessageInfo2{% endtrans %}</p></div>
+
+    <div id="loadingSpinner" style="display:none;margin-bottom:10px">
+        <button class="btn btn-sm btn-warning">
+            <span class="glyphicon glyphicon-refresh glyphicon-refresh-animate"></span> {% trans %}ticketing.bookingPage.checkavailability{% endtrans %}
+        </button>
+    </div>
+
+    {{ include("TicketingBundle:Forms:orderTypeForm.html.twig") }}
+
     <div id="PricesInformationMessage">
         <h2>{% trans %}ticketing.bookingPage.ticketPricing{% endtrans %}</h2>
         <ul class="list-group">
@@ -22,18 +35,6 @@
             <li class="list-group-item"><em>{% trans %}ticketing.bookingPage.free{% endtrans %}</em></li>
         </ul>
     </div>
-
-    <div id="ticketsQtyMessageWarning" class="alert alert-warning text-center" style="display:none">{% trans %}ticketing.bookingPage.ticketsQtyMessageWarning{% endtrans %}</div>
-    <div id="ticketsQtyMessageInfo" class="alert alert-info text-center" style="display:none"><p><strong>{% trans %}ticketing.bookingPage.ticketsQtyMessageInfo1{% endtrans %} </strong> {% trans %}ticketing.bookingPage.ticketsQtyMessageInfo2{% endtrans %}</p></div>
-    <div id="resetTicketsMessageWarning" class="alert alert-warning text-center" style="display:none"><strong>{% trans %}ticketing.bookingPage.resetTicketsMessageWarning2{% endtrans %} </strong> {% trans %}ticketing.bookingPage.resetTicketsMessageWarning2{% endtrans %}</div>
-
-    <div id="loadingSpinner" style="display:none;margin-bottom:10px">
-        <button class="btn btn-sm btn-warning">
-            <span class="glyphicon glyphicon-refresh glyphicon-refresh-animate"></span> {% trans %}ticketing.bookingPage.checkavailability{% endtrans %}
-        </button>
-    </div>
-
-    {{ include("TicketingBundle:Forms:orderTypeForm.html.twig") }}
 
 
 

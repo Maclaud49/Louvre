@@ -26,28 +26,30 @@ class OrderType extends AbstractType
                     'widget' => 'single_text',
                     'html5' =>false,
                     'attr' => array('class' => 'bookingDatepicker text-center'),
-                    'required' => false,
-                    'format' => 'dd/MM/yyyy'
+                    'required' => true,
+                    'format' => 'dd/MM/yyyy',
                 ))
 
             ->add('quantity', IntegerType::class,
                 array(
                 'label' =>'ticketing.form.label.quantity',
                 'required' => false,
-                'label_attr' =>array('id' =>'qtyLabel'),
-                'attr' => array('class' => 'text-center'),
-                //'data' => 0,
+                'label_attr' =>array('id' =>'qtyLabel', 'class' => 'invisible'),
+                'attr' => array('class' => 'text-center invisible'),
+
                     ))
             ->add('tickets', CollectionType::class,
                 array(
                     'entry_type' => TicketType::class,
                     'entry_options' => array('attr' =>
-                        array('class' =>'ticket-form')),
+                        array('class' =>'ticket-form'),'label' => false),
                     'allow_add' => true,
                     'allow_delete' =>true,
                     'error_bubbling' => false,
                     'label'=> false,
-                    'required' =>true
+                    'required' =>true,
+                    //'by_reference' => false
+
 
 
                 ))

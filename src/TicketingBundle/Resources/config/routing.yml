@@ -1,21 +1,21 @@
 ticketing_booking:
-    path:     /reservation
+    path:     /booking
     defaults: { _controller: TicketingBundle:BookingProcess:booking }
 
 ticketing_ckeckout:
-    path:     /verification-paiement
+    path:     /check-payment
     defaults: { _controller: TicketingBundle:BookingProcess:checkout }
     methods: [POST]
 
-ticketing_paiement:
-    path:     /paiement
-    defaults: { _controller: TicketingBundle:BookingProcess:paiement }
+ticketing_payment:
+    path:     /payment
+    defaults: { _controller: TicketingBundle:BookingProcess:payment }
 
 ticketing_summary:
-    path:     /recapitulatif
+    path:     /summary
     defaults: { _controller: TicketingBundle:BookingProcess:summary }
 
 ticketing_soldTicketsNb:
-    path: /billets-vendus
+    path: /sold-tickets
     defaults: { _controller: TicketingBundle:BookingProcess:soldTicketsNb }
     methods: [POST]

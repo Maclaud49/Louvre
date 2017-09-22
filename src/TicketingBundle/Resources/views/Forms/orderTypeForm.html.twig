@@ -1,7 +1,7 @@
 {% form_theme form 'bootstrap_3_layout.html.twig' %}
 
 <div class="well">
-    {{ form_start(form, {'attr':{'class':'orderForm'}}) }}
+    {{ form_start(form) }}
 
     {{ form_row(form.bookingDate)}}
 
@@ -9,17 +9,20 @@
 
     <hr>
 
-    {{ form_row(form.tickets)}}
+
+
     {{ form_widget(form.tickets)}}
     {{ form_errors(form.tickets)}}
 
 
+
     <br>
+    <div class="text-center col-sm-offset-4 col-sm-2 page-item" style="margin-bottom: 10px;">
+        <button type="button" class="btn btn-success" id="addTicket-btn"  value="" >{% trans %}ticketing.orderTypeFormPage.addTicketBtn{% endtrans %}</button>
+    </div>
 
-
-
-    <div class="form-group text-center">
-            <input type="submit" class="btn btn-primary" id="validate-btn"  value="{% trans %}ticketing.orderTypeFormPage.paymentBtn{% endtrans %}" />
+    <div class="text-center col-sm-2  page-item">
+        <button type="submit" class="btn btn-primary" id="validate-btn"  value="" >{% trans %}ticketing.orderTypeFormPage.paymentBtn{% endtrans %}</button>
     </div>
 
     {{ form_end(form) }}

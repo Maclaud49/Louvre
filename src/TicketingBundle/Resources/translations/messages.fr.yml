@@ -23,12 +23,11 @@ ticketing:
     ticketsQtyMessageWarning: Veuillez choisir une quantité de billet positive
     ticketsQtyMessageInfo1: Info stock :
     ticketsQtyMessageInfo2: il reste suffisament de billets pour votre commande pour la date choisie.
-    resetTicketsMessageWarning1: Attention :
-    resetTicketsMessageWarning2: modifier la quantité de tickets réinitialise les données.
     checkavailability: Vérification disponibilité...
 
   orderTypeFormPage:
     paymentBtn: Paiement
+    addTicketBtn : Ajouter un billet
 
   form:
     label:
