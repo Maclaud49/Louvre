@@ -91,4 +91,8 @@ ticketing:
     team: Louvre Museum's team
     subject: Ticket(s) for your Louvre Museum visit
 
-Veuillez renseigner ce champ.: test
+  error:
+     message: An error occured!
+     error404Message: The requested page couldn't be located. Checkout for any URL misspelling or
+     backHome: return to the booking page.
+     pageNotFound: Page not found

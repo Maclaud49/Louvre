@@ -88,4 +88,9 @@ ticketing:
     team: L'équipe du musée du Louvre
     subject: Justificatif pour votre visite du musée du Louvre
 
+  error:
+    message: Une erreur est survenue !
+    error404Message: La page demandée n'a pu être trouvée.Vérifiez l'Url ou
+    backHome: retournez à la page de réservation
+    pageNotFound: Page non trouvée
 
