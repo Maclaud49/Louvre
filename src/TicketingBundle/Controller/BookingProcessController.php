@@ -91,22 +91,23 @@ class BookingProcessController extends Controller
         return $this->render('TicketingBundle:BookingProcess:payment.html.twig', array('order' => $order, 'locale' => $locale));
     }
 
-    public function summaryAction()
+    public function summaryAction(Request $request)
     {
         $order = $this->get('session')->get('order');
         $email = $this->get('session')->get('email');
         $qty = $this->get('session')->get('qty');
         $em = $this->getDoctrine()->getManager();
+        $locale = $request->attributes->get('_locale');
 
         //Save order on the bdd
-        /*$em->persist($order);
-        $em->flush();*/
+        $em->persist($order);
+        $em->flush();
 
         $orderNew = new Order();
         $this->get('session')->set('order',$orderNew);
 
 
-        return $this->render('TicketingBundle:BookingProcess:summary.html.twig',  array('order' => $order, 'email' => $email, 'qty' => $qty));
+        return $this->render('TicketingBundle:BookingProcess:summary.html.twig',  array('order' => $order, 'email' => $email, 'qty' => $qty,'locale' => $locale));
     }
 
     public function mailOrderAction()
@@ -121,6 +122,7 @@ class BookingProcessController extends Controller
         $recipientEmail = $request->get('stripeEmail');
         $this->get('session')->set('email', $recipientEmail);
         $token = $request->get('stripeToken');
+        $locale = $request->attributes->get('_locale');
 
         $mailer = $this->get('ticketing.mail.swiftmailer');
 
@@ -129,7 +131,7 @@ class BookingProcessController extends Controller
             $stripe->paymentByStripe($order, $token);
 
             //Send mail to the customer
-            $mailer->mailTickets($order,$recipientEmail);
+            $mailer->mailTickets($order,$recipientEmail, $locale);
 
 
             $this->addFlash("success", "ticketing.summaryPage.successMessage");

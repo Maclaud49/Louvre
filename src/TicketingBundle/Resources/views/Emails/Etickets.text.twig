@@ -1,6 +1,6 @@
 {% trans %}ticketing.paymentPage.orderSummary{% endtrans %}
 
-{% trans %}ticketing.paymentPage.visitDate{% endtrans %} {{ order.bookingDate|date("d/m/y") }}
+{% trans %}ticketing.paymentPage.visitDate{% endtrans %} {{ order.bookingDate|localizeddate('medium','none',locale) }}
 
 {% for ticket in order.tickets %}
 

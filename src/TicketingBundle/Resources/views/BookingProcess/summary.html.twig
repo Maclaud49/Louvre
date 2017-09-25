@@ -13,7 +13,7 @@
     {% endfor %}
 
     {% if order %}
-    <div>{% trans %}ticketing.summaryPage.thankyou{% endtrans %} {{ order.bookingDate|date("d/m/y") }}.</div><br>
+    <div>{% trans %}ticketing.summaryPage.thankyou{% endtrans %} {{ order.bookingDate|localizeddate('medium','none',locale) }}.</div><br>
     {% endif %}
 
     {% if email %}

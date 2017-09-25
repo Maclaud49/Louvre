@@ -19,7 +19,7 @@
 
 
                 <div style="margin-top: 30px">
-                    <p><strong>{% trans %}ticketing.paymentPage.visitDate{% endtrans %}</strong> {{ order.bookingDate|date("d/m/y") }}</p>
+                    <p><strong>{% trans %}ticketing.paymentPage.visitDate{% endtrans %}</strong> {{ order.bookingDate|localizeddate('medium','none',locale) }}</p>
                 </div>
 
 

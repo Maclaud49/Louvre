@@ -20,11 +20,11 @@ class MailBySwiftmailer{
         $this->translator = $translator;
     }
 
-    public function mailTickets(Order $order, String $recipient)
+    public function mailTickets(Order $order, String $recipient, String $locale)
     {
 
-        $body = $this->renderTemplateHTML($order);
-        $part = $this->renderTemplateText($order);
+        $body = $this->renderTemplateHTML($order, $locale);
+        $part = $this->renderTemplateText($order, $locale);
         $subject = $this->translator->trans('ticketing.email.subject');
         
 
@@ -38,22 +38,24 @@ class MailBySwiftmailer{
         $this->mailer->send($message);
     }
 
-    public function renderTemplateHTML(Order $order)
+    public function renderTemplateHTML(Order $order, String $locale)
     {
         return $this->twig->render(
             'TicketingBundle:Emails:Etickets.html.twig',
             array(
-                'order' => $order
+                'order' => $order,
+                'locale' => $locale
             )
         );
     }
 
-    public function renderTemplateText(Order $order)
+    public function renderTemplateText(Order $order, String $locale)
     {
         return $this->twig->render(
             'TicketingBundle:Emails:Etickets.text.twig',
             array(
-                'order' => $order
+                'order' => $order,
+                'locale' => $locale
             )
         );
     }
