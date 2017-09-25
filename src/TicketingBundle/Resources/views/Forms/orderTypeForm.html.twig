@@ -1,7 +1,7 @@
 {% form_theme form 'bootstrap_3_layout.html.twig' %}
 
 <div class="well">
-    {{ form_start(form) }}
+    {{ form_start(form, {'attr' : {'id' : 'myForm'}}) }}
 
     {{ form_row(form.bookingDate)}}
 
@@ -22,7 +22,7 @@
     </div>
 
     <div class="text-center col-sm-2  page-item">
-        <button type="submit" class="btn btn-primary" id="validate-btn"  value="" >{% trans %}ticketing.orderTypeFormPage.paymentBtn{% endtrans %}</button>
+        <button type="submit" class="btn btn-primary" id="validate-btn" value="validate-btn" >{% trans %}ticketing.orderTypeFormPage.paymentBtn{% endtrans %}</button>
     </div>
 
     {{ form_end(form) }}

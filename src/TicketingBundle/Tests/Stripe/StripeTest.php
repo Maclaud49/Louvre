@@ -1,5 +1,5 @@
 <?php
-namespace tests\TicketingBundle\Mailer;
+namespace TicketingBundle\Tests\Stripe;
 
 use TicketingBundle\Entity\Order;
 use TicketingBundle\Entity\Ticket;

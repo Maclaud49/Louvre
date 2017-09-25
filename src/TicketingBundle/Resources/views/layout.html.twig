@@ -33,21 +33,7 @@
       </div>
   </nav>
 
-  <div class="btn-group">
 
-      <button type="button" class="btn btn-default language dropdown-toggle" data-toggle="dropdown">
-          {{ app.request.locale }} &nbsp;<span class="caret"></span>
-      </button>
-      <ul class="dropdown-menu" role="menu">
-          {% if app.request.locale == 'en' %}
-              <li><a href="{{ path(app.request.get('_route'), app.request.get('_route_params')|merge({'_locale': 'en'})) }}"><i class="fa fa-check"></i> English</a></li>
-              <li><a href="{{ path(app.request.get('_route'), app.request.get('_route_params')|merge({'_locale': 'fr'})) }}">French</a></li>
-          {% else %}
-              <li><a href="{{ path(app.request.get('_route'), app.request.get('_route_params')|merge({'_locale': 'fr'})) }}"><i class="fa fa-check"></i> Français</a></li>
-              <li><a href="{{ path(app.request.get('_route'), app.request.get('_route_params')|merge({'_locale': 'en'})) }}">Anglais</a></li>
-          {% endif %}
-      </ul>
-  </div>
 
 
 

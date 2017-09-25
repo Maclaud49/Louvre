@@ -1,28 +1,35 @@
 <?php
-namespace tests\TicketingBundle\Mailer;
+namespace TicketingBundle\Tests\Mailer;
 
 use TicketingBundle\Entity\Order;
 use TicketingBundle\Entity\Ticket;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
+use TicketingBundle\Services\Mailer;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 
 class MailerTest extends KernelTestCase{
 
     private $mailer;
 
+
     public function setUp()
     {
         self::bootKernel();
 
-        $this->mailer = static::$kernel->getContainer()
+        $this->mailer = self::$kernel->getContainer()
             ->get('ticketing.mail.swiftmailer');
     }
+
+   /* public function __construct(Mailer\MailBySwiftmailer $mailer){
+        $this->mailer = $mailer;
+    }*/
 
     public function testSendTicketsbyMail(){
 
 
         $bookingDate = new \DateTime("now");
-        $birthdayDate = new \DateTime('13-04-1981');
+        $birthdayDate = new \DateTime('13-0-1981');
 
         $formDataTicket = array(
             'type'=>'1',

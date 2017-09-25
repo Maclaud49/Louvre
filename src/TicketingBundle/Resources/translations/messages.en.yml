@@ -83,6 +83,7 @@ ticketing:
     thankyou: Louvre Museum will be happy to welcome you the
     tickets: Your tickets and order summary have been sent to your email address :
     ticket: Your ticket and order summary have been sent to your email address :
+    backHome: Home
 
   email:
     orderRef: Order reference :

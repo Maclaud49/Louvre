@@ -46,8 +46,10 @@ class BookingProcessController extends Controller
 
             return $this->redirectToRoute('ticketing_payment');
         }
+
             return $this->render('TicketingBundle:BookingProcess:booking.html.twig', array(
                 'form' => $form->createView()
+
             ));
 
     }
@@ -94,6 +96,14 @@ class BookingProcessController extends Controller
         $order = $this->get('session')->get('order');
         $email = $this->get('session')->get('email');
         $qty = $this->get('session')->get('qty');
+        $em = $this->getDoctrine()->getManager();
+
+        //Save order on the bdd
+        /*$em->persist($order);
+        $em->flush();*/
+
+        $orderNew = new Order();
+        $this->get('session')->set('order',$orderNew);
 
 
         return $this->render('TicketingBundle:BookingProcess:summary.html.twig',  array('order' => $order, 'email' => $email, 'qty' => $qty));
@@ -111,7 +121,7 @@ class BookingProcessController extends Controller
         $recipientEmail = $request->get('stripeEmail');
         $this->get('session')->set('email', $recipientEmail);
         $token = $request->get('stripeToken');
-        $em = $this->getDoctrine()->getManager();
+
         $mailer = $this->get('ticketing.mail.swiftmailer');
 
         try {
@@ -121,9 +131,6 @@ class BookingProcessController extends Controller
             //Send mail to the customer
             $mailer->mailTickets($order,$recipientEmail);
 
-            //Save order on the bdd
-            /*$em->persist($order);
-            $em->flush();*/
 
             $this->addFlash("success", "ticketing.summaryPage.successMessage");
             return $this->redirectToRoute('ticketing_summary');

@@ -1,6 +1,6 @@
 <?php
 
-namespace TicketingBundle\Stripe;
+namespace TicketingBundle\Services\Stripe;
 
 use TicketingBundle\Entity\Order;
 

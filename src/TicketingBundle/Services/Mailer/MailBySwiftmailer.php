@@ -1,6 +1,7 @@
 <?php
 
-namespace TicketingBundle\Mailer;
+namespace TicketingBundle\Services\Mailer;
+
 use Symfony\Component\Translation\DataCollectorTranslator;
 use TicketingBundle\Entity\Order;
 

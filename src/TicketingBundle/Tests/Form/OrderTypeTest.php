@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\AppBundle\Form\Type;
+namespace TicketingBundle\Tests\Form;
 
 use TicketingBundle\Form\OrderType;
 use TicketingBundle\Entity\Order;

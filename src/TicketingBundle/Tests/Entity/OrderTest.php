@@ -1,6 +1,6 @@
 <?php
 
-namespace tests\TicketingBundle\Entity;
+namespace TicketingBundle\Tests\Entity;
 
 use TicketingBundle\Entity\Order;
 use TicketingBundle\Entity\Ticket;

@@ -80,6 +80,7 @@ ticketing:
     thankyou: Le musée du Louvre vous remercie pour votre commande et sera heureux de vous accueillir le
     tickets: Vos e-billets ainsi que le récapitulatif de votre commande vous ont été envoyés à votre adresse email :
     ticket: Votre e-billet ainsi que le récapitulatif de votre commande vous ont été envoyés à votre adresse email :
+    backHome: Accueil
 
   email:
     orderRef: Référence de la commande :
