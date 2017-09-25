@@ -1,6 +1,7 @@
 <?php
 
 namespace TicketingBundle\Mailer;
+use Symfony\Component\Translation\DataCollectorTranslator;
 use TicketingBundle\Entity\Order;
 
 class MailBySwiftmailer{
@@ -8,12 +9,14 @@ class MailBySwiftmailer{
     private $mailer;
     private $twig;
     private $from;
+    private $translator;
 
-    public function  __construct(\Swift_Mailer $mailer,\Twig_Environment $twig,String $from){
+    public function  __construct(\Swift_Mailer $mailer,\Twig_Environment $twig,String $from, DataCollectorTranslator $translator){
 
         $this->mailer = $mailer;
         $this->twig = $twig;
         $this->from =$from;
+        $this->translator = $translator;
     }
 
     public function mailTickets(Order $order, String $recipient)
@@ -21,10 +24,11 @@ class MailBySwiftmailer{
 
         $body = $this->renderTemplateHTML($order);
         $part = $this->renderTemplateText($order);
+        $subject = $this->translator->trans('ticketing.email.subject');
         
 
         $message = \Swift_Message::newInstance()
-            ->setSubject('ticketing.email.credential')
+            ->setSubject($subject)
             ->setFrom($this->from)
             ->setTo($recipient)
             ->setBody($body,'text/html'

@@ -51,7 +51,6 @@ class TicketType extends AbstractType
                     'label' =>'ticketing.form.label.country',
                     'attr' => array('class' => 'text-center requiredMessage' ),
                     'required' => true,
-                    //'oninvalid'=>"this.setCustomValidity('Veuillez remplir ce champ')", 'oninput'=>"setCustomValidity(' ')"
 
                 ))
             ->add('birthdayDate', BirthdayType::class,

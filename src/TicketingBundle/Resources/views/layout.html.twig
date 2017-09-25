@@ -16,9 +16,44 @@
   </head>
 
   <body>
+
+  <nav class="navbar navbar-default navbar-fixed-top ">
+      <div class="container">
+          <div id="navbar" class="navbar-collapse collapse">
+              <ul class="nav navbar-nav" style="float: right;">
+                  <li class="dropdown">
+                      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{% trans %}ticketing.layout.language{% endtrans %} : {{ app.request.locale }} <span class="caret"></span></a>
+                          <ul class="dropdown-menu" role="menu">
+                                  <li><a href="{{ path(app.request.get('_route'), app.request.get('_route_params')|merge({'_locale': 'en'})) }}"><i class="fa fa-check"></i>{% trans %}ticketing.layout.english{% endtrans %}</a></li>
+                                  <li><a href="{{ path(app.request.get('_route'), app.request.get('_route_params')|merge({'_locale': 'fr'})) }}">{% trans %}ticketing.layout.french{% endtrans %}</a></li>
+                          </ul>
+                  </li>
+              </ul>
+          </div><!--/.nav-collapse -->
+      </div>
+  </nav>
+
+  <div class="btn-group">
+
+      <button type="button" class="btn btn-default language dropdown-toggle" data-toggle="dropdown">
+          {{ app.request.locale }} &nbsp;<span class="caret"></span>
+      </button>
+      <ul class="dropdown-menu" role="menu">
+          {% if app.request.locale == 'en' %}
+              <li><a href="{{ path(app.request.get('_route'), app.request.get('_route_params')|merge({'_locale': 'en'})) }}"><i class="fa fa-check"></i> English</a></li>
+              <li><a href="{{ path(app.request.get('_route'), app.request.get('_route_params')|merge({'_locale': 'fr'})) }}">French</a></li>
+          {% else %}
+              <li><a href="{{ path(app.request.get('_route'), app.request.get('_route_params')|merge({'_locale': 'fr'})) }}"><i class="fa fa-check"></i> Français</a></li>
+              <li><a href="{{ path(app.request.get('_route'), app.request.get('_route_params')|merge({'_locale': 'en'})) }}">Anglais</a></li>
+          {% endif %}
+      </ul>
+  </div>
+
+
+
   <div class="container-fluid">
 
-    <div class="row" id="box-search">
+    <div class="row">
       <div class="thumbnail text-center">
         <img src="{{ asset('images/louvreBilleterie.jpg') }}" alt="Entrée du Louvre" class="img-responsive">
         <div class="caption col-sm-12">

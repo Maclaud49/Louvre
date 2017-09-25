@@ -3,6 +3,9 @@ ticketing:
   layout:
     ticketing: Billeterie
     welcome: Bienvenue sur la billeterie du musée du Louvre
+    language: Langue
+    english: Anglais
+    french: Français
 
   bookingPage:
     booking: Réservation
@@ -82,6 +85,6 @@ ticketing:
     orderRef: Référence de la commande :
     bye: Nous vous souhaitons une très bonne visite du musée !
     team: L'équipe du musée du Louvre
-    credential: Justificatif pour votre visite du musée du Louvre
+    subject: Justificatif pour votre visite du musée du Louvre
 
 

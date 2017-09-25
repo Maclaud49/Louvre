@@ -6,6 +6,9 @@ ticketing:
   layout:
     ticketing: Ticketing
     welcome: Welcome to the Louvre Museum ticketing
+    language: Language
+    english: English
+    french: French
 
   bookingPage:
     booking: Booking
@@ -85,6 +88,6 @@ ticketing:
     orderRef: Order reference :
     bye: We wish you a pleasant time visiting Louvre Museum!
     team: Louvre Museum's team
-    credential: Ticket(s) for your Louvre Museum visit
+    subject: Ticket(s) for your Louvre Museum visit
 
 Veuillez renseigner ce champ.: test
