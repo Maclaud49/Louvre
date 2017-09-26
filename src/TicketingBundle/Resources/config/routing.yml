@@ -19,3 +19,7 @@ ticketing_soldTicketsNb:
     path: /sold-tickets
     defaults: { _controller: TicketingBundle:BookingProcess:soldTicketsNb }
     methods: [POST]
+
+ticketing_home:
+    path: /
+    defaults: { _controller: TicketingBundle:BookingProcess:home }
