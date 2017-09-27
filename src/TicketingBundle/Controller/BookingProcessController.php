@@ -99,12 +99,14 @@ class BookingProcessController extends Controller
         $em = $this->getDoctrine()->getManager();
         $locale = $request->attributes->get('_locale');
 
-        //Save order on the bdd
-        $em->persist($order);
-        $em->flush();
-
-        $orderNew = new Order();
-        $this->get('session')->set('order',$orderNew);
+        if($email !=null) {
+            //Save order on the bdd
+            $em->persist($order);
+            $em->flush();
+            $orderNew = new Order();
+            $this->get('session')->set('order', $orderNew);
+            $this->get('session')->set('email', null);
+        }
 
 
         return $this->render('TicketingBundle:BookingProcess:summary.html.twig',  array('order' => $order, 'email' => $email, 'qty' => $qty,'locale' => $locale));
@@ -126,21 +128,51 @@ class BookingProcessController extends Controller
 
         $mailer = $this->get('ticketing.mail.swiftmailer');
 
-        try {
-            //Charge the customer
-            $stripe->paymentByStripe($order, $token);
 
-            //Send mail to the customer
-            $mailer->mailTickets($order,$recipientEmail, $locale);
+            try {
+                //Charge the customer
+                $stripe->paymentByStripe($order, $token);
 
 
-            $this->addFlash("success", "ticketing.summaryPage.successMessage");
-            return $this->redirectToRoute('ticketing_summary');
-        } catch (\Stripe\Error\Card $e){
-            $this->addFlash("error", "ticketing.paymentPage.errorMessage");
-            return $this->redirectToRoute("ticketing_payment");
-            // The card has been declined
-        }
+                //Send mail to the customer
+                $mailer->mailTickets($order, $recipientEmail, $locale);
+
+
+                $this->addFlash("success", "ticketing.summaryPage.successMessage");
+                return $this->redirectToRoute('ticketing_summary');
+            } catch (\Stripe\Error\Card $e) {
+                $this->addFlash("error", "ticketing.paymentPage.stripe.errorDeclinedMessage");
+                return $this->redirectToRoute("ticketing_payment");
+                // The card has been declined
+            } catch (\Stripe\Error\RateLimit $e) {
+                // Too many requests made to the API too quickly
+                $this->addFlash("error", "ticketing.paymentPage.stripe.errorTooFastMessage");
+                return $this->redirectToRoute("ticketing_payment");
+            } catch (\Stripe\Error\InvalidRequest $e) {
+                // Invalid parameters were supplied to Stripe's API
+                $this->addFlash("error", "ticketing.paymentPage.stripe.errorInvalidParaMessage");
+                return $this->redirectToRoute("ticketing_payment");
+            } catch (\Stripe\Error\Authentication $e) {
+                // Authentication with Stripe's API failed
+                // (maybe you changed API keys recently)
+                $this->addFlash("error", "ticketing.paymentPage.stripe.errorAPIKeyMessage");
+                return $this->redirectToRoute("ticketing_payment");
+            } catch (\Stripe\Error\ApiConnection $e) {
+                // Network communication with Stripe failed
+                $this->addFlash("error", "ticketing.paymentPage.stripe.errorNetworkMessage");
+                return $this->redirectToRoute("ticketing_payment");
+            } catch (\Stripe\Error\Base $e) {
+                // Display a very generic error to the user, and maybe send
+                // yourself an email
+                $this->addFlash("error", "ticketing.paymentPage.stripe.errorMessage");
+                return $this->redirectToRoute("ticketing_payment");
+            } catch (\Exception $e) {
+                // Something else happened, completely unrelated to Stripe
+                $this->addFlash("error", "ticketing.paymentPage.stripe.errorMessage");
+                return $this->redirectToRoute("ticketing_payment");
+            }
+
+
     }
 
 

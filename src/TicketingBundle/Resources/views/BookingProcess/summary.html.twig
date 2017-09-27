@@ -12,17 +12,20 @@
         <div class="alert alert-success">{{ message|trans }}</div>
     {% endfor %}
 
-    {% if order %}
-    <div>{% trans %}ticketing.summaryPage.thankyou{% endtrans %} {{ order.bookingDate|localizeddate('medium','none',locale) }}.</div><br>
+    {% if email %}
+        <div>{% trans %}ticketing.summaryPage.thankyou{% endtrans %} {{ order.bookingDate|localizeddate('medium','none',locale) }}.</div><br>
+
+
+
+        {% if qty > 1 %}
+            <div>{% trans %}ticketing.summaryPage.tickets{% endtrans %} {{ email }}.</div>
+        {% else %}
+            <div>{% trans %}ticketing.summaryPage.ticket{% endtrans %} {{ email }}.</div>
+        {% endif %}
+    {% else %}
+        <div>{% trans %}ticketing.summaryPage.notpaidyet{% endtrans %}</div>
     {% endif %}
 
-    {% if email %}
-    {% if qty > 1 %}
-        <div>{% trans %}ticketing.summaryPage.tickets{% endtrans %} {{ email }}.</div>
-    {% else %}
-        <div>{% trans %}ticketing.summaryPage.ticket{% endtrans %} {{ email }}.</div>
-    {% endif %}
-    {% endif %}
 
     <div class="col-sm-6 page-item" style="margin-top:20px">
         <button type="button" class="btn btn-secondary">

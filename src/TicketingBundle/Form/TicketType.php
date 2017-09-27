@@ -67,7 +67,8 @@ class TicketType extends AbstractType
             ->add('reducedPrice', CheckboxType::class,
                 array(
                     'label' =>'ticketing.form.label.reducedPrice',
-                    'attr' => array('id' => 'reducedPrice'),
+                    'label_attr' => array('class' => 'reducedPriceLabel'),
+                    'attr' => array('id' => 'reducedPrice','title' =>'ticketing.form.other.credentials'),
 
                     'required' => false
                 ))

@@ -70,7 +70,17 @@ hr{
 
 /*Formular*/
 
+#ticketsQtyMessageInfo{
+    display:none;
+}
 
+#ticketsQtyMessageWarning{
+    display:none;
+}
+
+#hiddenStripe{
+    display:none;
+}
 
 /*Loading spinner*/
 .glyphicon-refresh-animate {

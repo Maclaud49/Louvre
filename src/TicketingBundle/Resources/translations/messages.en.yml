@@ -5,7 +5,7 @@ ticketing:
 
   layout:
     ticketing: Ticketing
-    welcome: Welcome to the Louvre Museum ticketing
+    welcome: Louvre Museum ticketing
     language: Language
     english: English
     french: French
@@ -28,7 +28,7 @@ ticketing:
     credential: (students, museum employees, serviceman)
     ticketsQtyMessageWarning: Quantity should be positive
     ticketsQtyMessageInfo1: Stock information :
-    ticketsQtyMessageInfo2: There are enough tickets for your order on the choosen date.
+    ticketsQtyMessageInfo2: There are enough tickets on the choosen date.
     checkavailability: Checking availability...
 
   orderTypeFormPage:
@@ -51,10 +51,10 @@ ticketing:
       day: Day
       month: Month
       year: Year
+      credentials: A credential will be asked at the entrance of the museum
 
   paymentPage:
     payment: Payment
-    errorMessage: The transaction was not validated
     orderSummary: Order summary for your Louvre Museum visit :
     visitDate: Visit date :
     ticket: Ticket
@@ -74,16 +74,23 @@ ticketing:
       name: Louvre Museum
       description: Online payment
       label: Payment by card
+            errorDeclinedMessage: The payment was not accepted.
+            errorTooFastMessage: Too many connections.
+            errorInvalidParaMessage: Some parameters are invvalid.
+            errorAPIKeyMessage: Check your API keys
+            errorNetworkMessage: Network is having trouble.
+            errorMessage: An unknown problem occured.
     noOrder: No order
     back: Back
 
   summaryPage:
     summary: Summary
-    successMessage: The transaction was validated
+    successMessage: The transaction was validated.
     thankyou: Louvre Museum will be happy to welcome you the
     tickets: Your tickets and order summary have been sent to your email address :
     ticket: Your ticket and order summary have been sent to your email address :
     backHome: Home
+    notpaidyet: No order paid yet.
 
   email:
     orderRef: Order reference :

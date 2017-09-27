@@ -1,8 +1,8 @@
 ticketing:
 
   layout:
-    ticketing: Billeterie
-    welcome: Bienvenue sur la billeterie du musée du Louvre
+    ticketing: Billetterie
+    welcome: Billetterie du musée du Louvre
     language: Langue
     english: Anglais
     french: Français
@@ -25,7 +25,7 @@ ticketing:
     credential: (étudiants, employés du musée, militaires)
     ticketsQtyMessageWarning: Veuillez choisir une quantité de billet positive
     ticketsQtyMessageInfo1: Info stock :
-    ticketsQtyMessageInfo2: il reste suffisament de billets pour votre commande pour la date choisie.
+    ticketsQtyMessageInfo2: il reste suffisament de billets pour la date choisie.
     checkavailability: Vérification disponibilité...
 
   orderTypeFormPage:
@@ -48,10 +48,11 @@ ticketing:
       day: Jour
       month: Mois
       year: Année
+      credentials: Un justificatif vous sera demandé à l'entrée du musée
 
   paymentPage:
     payment: Paiement
-    errorMessage: La transaction n'a pas été validée
+
     orderSummary: Récapitulatif de votre commande pour votre visite du musée du Louvre :
     visitDate: Date de la visite :
     ticket: Billet
@@ -71,16 +72,24 @@ ticketing:
       name: Musée du Louvre
       description: Paiement en ligne
       label: Paiement par carte
+      errorDeclinedMessage: La transaction a été déclinée.
+      errorTooFastMessage: Trop de demandes en simultané, veuillez réessayer.
+      errorInvalidParaMessage: Les données saisies ne sont pas correctes, veuillez vérifier celles-ci et recommencer.
+      errorAPIKeyMessage: Problème de API keys
+      errorNetworkMessage: Problème de connexion.
+      errorMessage: Un problème est survenu !
+
     noOrder: Pas de commande
     back: Retour
 
   summaryPage:
     summary: Récapitulatif
-    successMessage: La transaction a été validée
+    successMessage: La transaction a été validée.
     thankyou: Le musée du Louvre vous remercie pour votre commande et sera heureux de vous accueillir le
     tickets: Vos e-billets ainsi que le récapitulatif de votre commande vous ont été envoyés à votre adresse email :
     ticket: Votre e-billet ainsi que le récapitulatif de votre commande vous ont été envoyés à votre adresse email :
     backHome: Accueil
+    notpaidyet: Pas de commande payée.
 
   email:
     orderRef: Référence de la commande :
@@ -93,4 +102,5 @@ ticketing:
     error404Message: La page demandée n'a pu être trouvée.Vérifiez l'Url ou
     backHome: retournez à la page de réservation
     pageNotFound: Page non trouvée
+
 

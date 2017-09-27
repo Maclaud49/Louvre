@@ -109,6 +109,7 @@ $(function(){
     $( ".bookingDatepicker").change(function(){
         var $qty =$('#order_quantity').val();
         $('#ticketsQtyMessageWarning').hide(0);
+        $('#ticketsQtyMessageInfo').hide(0);
         if($qty<=0){
             $('#ticketsQtyMessageWarning').show(0);
         }
@@ -125,30 +126,12 @@ $(function(){
         $('#PricesInformationMessage').show(0);
         halfDayTicket();
         checkQtyOfDay();
+        $('.reducedPriceLabel').attr('title',$proofneeded);
 
 
     /****************************************************************************************************************/
 
 
-    //display tickets depending on the qty
-    $('#order_quantity').change(function(){
-        var $date = $( ".bookingDatepicker").val();
-        var $qty =$('#order_quantity').val();
-
-        if ($qty>0){
-            $('#ticketsQtyMessageWarning').hide(0);
-            $('#openDaysInformationMessage').hide(0);
-            $('#PricesInformationMessage').show(0);
-            displayTickets();
-            halfDayTicket();
-            checkQtyOfDay();
-            $('.checkbox>label').attr('title',$proofneeded);
-        }
-        else if ($qty<=0){
-            $('#ticketsQtyMessageInfo').hide(0);
-            $('#ticketsQtyMessageWarning').show(0);
-        }
-    })
 
     $('#addTicket-btn').click(function(){
         var $qty =$('#order_quantity').val();
@@ -157,6 +140,7 @@ $(function(){
         $('#order_quantity').val(parseInt($qty)+1);
         checkQtyOfDay();
         halfDayTicket();
+        $('.reducedPriceLabel').attr('title',$proofneeded);
     })
 });
 
@@ -225,6 +209,8 @@ function checkQtyOfDay(){
 var $loading = $('#loadingSpinner');
 $(document)
     .ajaxStart(function () {
+        $('#ticketsQtyMessageWarning').hide(0);
+        $('#ticketsQtyMessageInfo').hide(0);
         $loading.show();
     })
     .ajaxStop(function () {
