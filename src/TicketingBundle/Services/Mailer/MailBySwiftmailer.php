@@ -26,12 +26,14 @@ class MailBySwiftmailer{
         $body = $this->renderTemplateHTML($order, $locale);
         $part = $this->renderTemplateText($order, $locale);
         $subject = $this->translator->trans('ticketing.email.subject');
+        $logo = $this->translator->trans('ticketing.email.logo');
         
 
         $message = \Swift_Message::newInstance()
             ->setSubject($subject)
             ->setFrom($this->from)
             ->setTo($recipient)
+            ->attach(\Swift_Attachment::fromPath('C:\xampp2\htdocs\www\Symfony\web\images\louvre_logo.jpg')->setFilename($logo))
             ->setBody($body,'text/html'
             )
             ->addPart($part,'text/plain');

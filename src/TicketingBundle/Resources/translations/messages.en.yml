@@ -97,6 +97,7 @@ ticketing:
     bye: We wish you a pleasant time visiting Louvre Museum!
     team: Louvre Museum's team
     subject: Ticket(s) for your Louvre Museum visit
+    logo: Louvre Museum logo
 
   error:
      message: An error occured!

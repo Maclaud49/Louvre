@@ -96,6 +96,7 @@ ticketing:
     bye: Nous vous souhaitons une très bonne visite du musée !
     team: L'équipe du musée du Louvre
     subject: Justificatif pour votre visite du musée du Louvre
+    logo: Logo du musée du Louvre
 
   error:
     message: Une erreur est survenue !
