@@ -6,6 +6,7 @@ ticketing:
     language: Langue
     english: Anglais
     french: Français
+    entrance: Entrée-du-musée-du-louvre
 
   bookingPage:
     booking: Réservation
@@ -89,7 +90,7 @@ ticketing:
     tickets: Vos e-billets ainsi que le récapitulatif de votre commande vous ont été envoyés à votre adresse email :
     ticket: Votre e-billet ainsi que le récapitulatif de votre commande vous ont été envoyés à votre adresse email :
     backHome: Accueil
-    notpaidyet: Pas de commande payée.
+    notPaidyet: Pas de commande payée.
 
   email:
     orderRef: Référence de la commande :

@@ -16,6 +16,8 @@ class BookingProcessController extends Controller
     public function bookingAction(Request $request)
     {
 
+
+
         if( $this->get('session')->get('order')==null){
             $order = new Order();
         }
@@ -112,10 +114,6 @@ class BookingProcessController extends Controller
         return $this->render('TicketingBundle:BookingProcess:summary.html.twig',  array('order' => $order, 'email' => $email, 'qty' => $qty,'locale' => $locale));
     }
 
-    public function mailOrderAction()
-    {
-        return $this->render('TicketingBundle:BookingProcess:mailOrder.html.twig');
-    }
 
     public function checkoutAction(Request $request)
     {

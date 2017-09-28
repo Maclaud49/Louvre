@@ -1,7 +1,4 @@
 ticketing:
-  order:
-
-  ticket:
 
   layout:
     ticketing: Ticketing
@@ -9,6 +6,7 @@ ticketing:
     language: Language
     english: English
     french: French
+    entrance: Louvre-museum-entrance
 
   bookingPage:
     booking: Booking
@@ -74,12 +72,12 @@ ticketing:
       name: Louvre Museum
       description: Online payment
       label: Payment by card
-            errorDeclinedMessage: The payment was not accepted.
-            errorTooFastMessage: Too many connections.
-            errorInvalidParaMessage: Some parameters are invvalid.
-            errorAPIKeyMessage: Check your API keys
-            errorNetworkMessage: Network is having trouble.
-            errorMessage: An unknown problem occured.
+      errorDeclinedMessage: The payment was not accepted.
+      errorTooFastMessage: Too many connections.
+      errorInvalidParaMessage: Some parameters are invvalid.
+      errorAPIKeyMessage: Check your API keys
+      errorNetworkMessage: Network is having trouble.
+      errorMessage: An unknown problem occured.
     noOrder: No order
     back: Back
 
@@ -90,7 +88,7 @@ ticketing:
     tickets: Your tickets and order summary have been sent to your email address :
     ticket: Your ticket and order summary have been sent to your email address :
     backHome: Home
-    notpaidyet: No order paid yet.
+    notPaidyet: No order paid yet.
 
   email:
     orderRef: Order reference :

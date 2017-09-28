@@ -12,7 +12,7 @@ class MailBySwiftmailer{
     private $from;
     private $translator;
 
-    public function  __construct(\Swift_Mailer $mailer,\Twig_Environment $twig,String $from, DataCollectorTranslator $translator){
+    public function  __construct(\Swift_Mailer $mailer,\Twig_Environment $twig,String $from, \Symfony\Component\Translation\TranslatorInterface $translator){
 
         $this->mailer = $mailer;
         $this->twig = $twig;
@@ -38,6 +38,16 @@ class MailBySwiftmailer{
             )
             ->addPart($part,'text/plain');
         $this->mailer->send($message);
+
+
+        //For 1&1 server
+        /*$headers = "From: tickets@museedulouvre.fr\r\n";
+        $headers .= "MIME-Version: 1.0\r\n";
+        $headers .= "Content-Type: text/html; charset=utf-8\r\n";
+        mail($recipient, $subject, $body, $headers);*/
+
+
+
     }
 
     public function renderTemplateHTML(Order $order, String $locale)
