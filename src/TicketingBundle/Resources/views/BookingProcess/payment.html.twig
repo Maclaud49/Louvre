@@ -91,23 +91,6 @@
                             </button>
                         </div>
                         <div class="col-sm-6">
-                            {#<script src="https://js.stripe.com/v3/"></script>
-
-                            <form action="{{ path ('ticketing_ckeckout') }}" method="post" id="stripeForm">
-                                <div class="form-row">
-                                    <label for="card-element">
-                                        Credit or debit card
-                                    </label>
-                                    <div id="card-element">
-                                        <!-- a Stripe Element will be inserted here. -->
-                                    </div>
-
-                                    <!-- Used to display form errors -->
-                                    <div id="card-errors" role="alert"></div>
-                                </div>
-
-                                <button>Submit Payment</button>
-                            </form>#}
 
 
                             <form action="{{ path ('ticketing_ckeckout') }}" method="POST" id="stripeForm">
@@ -141,9 +124,7 @@
         <div class="row">
             <div class="text-center">
                 <div class="col-sm-6 page-item">
-                    <button type="button" class="btn btn-secondary">
-                        <a href="{{ path('ticketing_booking') }}" style="text-decoration: none">{% trans %}ticketing.paymentPage.back{% endtrans %}</a>
-                    </button>
+                    <a href="{{ path('ticketing_booking') }}" style="text-decoration: none" class="btn btn-secondary">{% trans %}ticketing.paymentPage.back{% endtrans %}</a>
                 </div>
             </div>
         </div>
