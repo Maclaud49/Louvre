@@ -107,11 +107,11 @@ class Ticket{
        $this->price = 0;
        }
 
-       elseif ($age>=4 && $age<12){
-       $this->price = 8;
+       elseif ($age>=4 && $age<12 || !$fullDay ){
+           $this->price = 8;
        }
 
-       elseif($reduced && $age>4 || !$fullDay ){
+       elseif($reduced && $age>4){
            $this->price = 10;
        }
 

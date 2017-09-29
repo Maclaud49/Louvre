@@ -11,30 +11,23 @@
         <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css">
         <link rel="stylesheet" href="{{ asset('css/louvre.css') }}" />
     {% endblock %}
-
+    <link rel="icon" type=image/png" href="{{ asset('images/favicon-16.png') }}" />
 
 </head>
 
 <body>
 
 
-
-
-
-
-
 <div class="container-fluid">
 
     <div class="row">
         <div class="thumbnail text-center">
-            <img src="{{ asset('images/louvreBilleterie.jpg') }}" alt="Entrée du Louvre" class="img-responsive">
+            <img src="{{ asset('images/louvreBilleterie.jpg') }}" alt={% trans %}ticketing.layout.entrance{% endtrans %} class="img-responsive">
             <div class="caption col-sm-12">
-                <p id="welcome-text">{% trans %}ticketing.error.message{% endtrans %}</p>
+                <p id="welcome-text">{% trans %}ticketing.layout.welcome{% endtrans %}</p>
             </div>
         </div>
     </div>
-
-
 
 
     <div id="content" class="text-center" style="display:flex;flex-direction:column;justify-content:center;align-items:center;">

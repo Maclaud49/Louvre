@@ -173,6 +173,24 @@ class BookingProcessController extends Controller
 
     }
 
+    public function setLocaleAction($language = null, Request $request)
+    {
+        if($language != null)
+        {
+
+            $this->get('session')->set('_locale', $language);
+        }
+
+        // back to the url
+        $url = $request->headers->get('referer');
+        if(empty($url))
+        {
+            $url = $this->container->get('router')->generate('ticketing_booking');
+        }
+
+        return $this->redirectToRoute($url);
+    }
+
 
 
 

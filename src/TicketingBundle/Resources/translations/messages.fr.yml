@@ -100,9 +100,9 @@ ticketing:
     logo: Logo du musée du Louvre
 
   error:
-    message: Une erreur est survenue !
-    error404Message: La page demandée n'a pu être trouvée.Vérifiez l'Url ou
-    backHome: retournez à la page de réservation
-    pageNotFound: Page non trouvée
+     message: An error occured!
+     error404Message: The requested page couldn't be located. Checkout for any URL misspelling or
+     backHome: return to the booking page.
+     pageNotFound: Page not found
 
 

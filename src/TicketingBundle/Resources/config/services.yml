@@ -13,7 +13,3 @@ services:
        - "%mailer_user%"
        - "@translator"
 
-  ticketing.mail.testmailer:
-       class: TicketingBundle\Tests\Mailer\MailerTest
-       arguments:
-        - "@ticketing.mail.swiftmailer"
