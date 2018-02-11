@@ -4,7 +4,26 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>{% block title %}{% trans %}ticketing.layout.ticketing{% endtrans %}{% endblock %}</title>
+    {%  set route = app.request.getPathInfo()  %}
+
+    {% if 'fr/ticketing' in route %}
+        {%  set ticketing_layout_ticketing_error = 'Erreur' %}
+        {%  set ticketing_layout_pageNotFound = 'Page non trouvée !' %}
+        {%  set ticketing_error_errorMessage = 'Une erreur est survenue. ' %}
+        {%  set ticketing_error_error404Message = 'La page demandée n\'a pu être trouvée. Vérifiez l\'Url ou ' %}
+        {%  set ticketing_error_backHome = 'retournez à la page de réservation.' %}
+    {% else %}
+        {%  set ticketing_layout_ticketing_error = 'Error' %}
+        {%  set ticketing_layout_pageNotFound = 'Page not found !' %}
+        {%  set ticketing_error_errorMessage = 'An error occured. ' %}
+        {%  set ticketing_error_error404Message = 'The requested page couldn\'t be located. Checkout for any URL misspelling or ' %}
+        {%  set ticketing_error_backHome = 'return to the booking page.' %}
+    {% endif %}
+
+
+
+
+    <title>{% block title %}{{ ticketing_layout_ticketing_error }}{% endblock %}</title>
 
     {% block stylesheets %}
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
@@ -18,13 +37,14 @@
 <body>
 
 
+
 <div class="container-fluid">
 
     <div class="row">
         <div class="thumbnail text-center">
             <img src="{{ asset('images/louvreBilleterie.jpg') }}" alt={% trans %}ticketing.layout.entrance{% endtrans %} class="img-responsive">
             <div class="caption col-sm-12">
-                <p id="welcome-text">{% trans %}ticketing.layout.welcome{% endtrans %}</p>
+                <p id="welcome-text">{{ ticketing_layout_pageNotFound }}</p>
             </div>
         </div>
     </div>

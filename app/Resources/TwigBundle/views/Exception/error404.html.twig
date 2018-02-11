@@ -1,9 +1,7 @@
 {% extends "base.html.twig" %}
 
 {% block content %}
-    <h1>{% trans %}ticketing.error.pageNotFound{% endtrans %}</h1>
-
     <p>
-        {% trans %}ticketing.error.error404Message{% endtrans %}  <a href="{{ path('ticketing_booking') }}">{% trans %}ticketing.error.backHome{% endtrans %}</a>.
+        {{ ticketing_error_error404Message }}<a href="{{ path('ticketing_booking') }}">{{ ticketing_error_backHome }}</a>.
     </p>
 {% endblock %}

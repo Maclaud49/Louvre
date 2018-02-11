@@ -96,33 +96,36 @@ class Ticket{
      */
     public function setPrice($price)
     {
-       $today =date("Y-m-d");
-       $birthday=$this->getBirthdayDate();
-       $dateTime1=new \Datetime($today);
-       $age = $dateTime1->diff($birthday)->format('%y');
-       $reduced = $this->getReducedPrice();
-       $fullDay = $this->getType();
+        $today =date("Y-m-d");
+        $birthday=$this->getBirthdayDate();
+        $dateTime1=new \Datetime($today);
+        $age = $dateTime1->diff($birthday)->format('%y');
+        $reduced = $this->getReducedPrice();
+        $fullDay = $this->getType();
 
-       if ($age<4){
-       $this->price = 0;
-       }
+        if ($age<4){
+            $this->price = 0;
+        }
 
-       elseif ($age>=4 && $age<12 || !$fullDay ){
-           $this->price = 8;
-       }
+        elseif ($age>=4 && $age<12){
+            $this->price = 8;
+        }
 
-       elseif($reduced && $age>4){
-           $this->price = 10;
-       }
+        elseif($reduced && $age>4){
+            $this->price = 10;
+        }
 
-       elseif ($age>=60){
-           $this->price = 12;
-       }
-       else{
-           $this->price = $price;
-       }
+        elseif ($age>=60){
+            $this->price = 12;
+        }
+        else{
+            $this->price = $price;
+        }
 
-
+        //Si tarif demi journée applicable
+        if (!$fullDay){
+            $this->price = $price/2;
+        }
     }
 
     /**
